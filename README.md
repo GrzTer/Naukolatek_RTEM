@@ -13,5 +13,5 @@
 
 ---
 # Przydatne linki
-https://www.figma.com/file/zaxl5wU608z9J7BesLggCP/naukolatek-team-library?type=design&node-id=0%3A1&mode=design&t=PuOzFr1hWV7bI672-1
-https://www.figma.com/file/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?type=whiteboard&node-id=0%3A1&t=FW0Yp6fZ3LtkCLzH-1
+- [FIGMA RTEM FLOW](https://www.figma.com/file/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?type=whiteboard&node-id=0%3A1&t=FW0Yp6fZ3LtkCLzH-1)
+- [FIGMA MOCK'UP](https://www.figma.com/file/zaxl5wU608z9J7BesLggCP/naukolatek-team-library?type=design&node-id=0%3A1&mode=design&t=PuOzFr1hWV7bI672-1)
