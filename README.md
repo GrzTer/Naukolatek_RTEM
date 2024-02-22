@@ -1,4 +1,6 @@
-# **REAL TIME ENERGY MANAGER**.
+# **REAL TIME ENERGY MANAGER**
+# ![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/86c477b2-96bc-451a-9293-201fcb830042)**CHAT GPT***![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/5a91fe2e-b438-48f7-96df-c7bc00ec4adb)
+
 ---
 # Każdy nowo zaczęty issue: RÓB NOWY BRANCH
 ## Funkcje do zrobienia:
@@ -11,3 +13,5 @@
 
 ---
 # Przydatne linki
+https://www.figma.com/file/zaxl5wU608z9J7BesLggCP/naukolatek-team-library?type=design&node-id=0%3A1&mode=design&t=PuOzFr1hWV7bI672-1
+https://www.figma.com/file/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?type=whiteboard&node-id=0%3A1&t=FW0Yp6fZ3LtkCLzH-1
