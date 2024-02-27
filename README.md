@@ -2,7 +2,9 @@
 # [![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/86c477b2-96bc-451a-9293-201fcb830042)](https://chat.openai.com/auth/login)**[CHAT GPT](https://chat.openai.com/auth/login)**[![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/5a91fe2e-b438-48f7-96df-c7bc00ec4adb)](https://chat.openai.com/auth/login)
 
 ---
-# Każdy nowo zaczęty issue: RÓB NOWY BRANCH
+# Każdy nowo zaczęty issue: 
+- Clon/Pull
+- RÓB NOWY BRANCH
 ## Funkcje do zrobienia:
 - (MZE)Monitorowanie Zużycia Energetycznego: Wykorzystamy zaawansowane czujniki i technologię IoT do śledzenia zużycia energii elektrycznej na różnych poziomach, od pojedynczych urządzeń po całe budynki. 
 - (PZ)Prognozowanie Zużycia: Zastosujemy algorytmy uczenia maszynowego, takie jak TensorFlow, do prognozowania przyszłego zużycia energii na podstawie danych historycznych i bieżących trendów. 
