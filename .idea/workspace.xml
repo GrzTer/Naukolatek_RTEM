@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment="" />
+    <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/Naukolatek_RTEM.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Naukolatek_RTEM.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/MZE/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/admin.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/apps.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/migrations/__init__.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/models.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/tests.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/P/views.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/RTEM/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/RTEM/RTEM/settings.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RTEM/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/requirements.txt" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -39,14 +53,24 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "1__0",
+    "last_opened_file_path": "C:/Users/Admin/Desktop/Naukolatek_RTEM",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
-    "settings.editor.selected.configurable": "vcs.Git",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-python-sdk-d68999036c7f-b11f5e8da5ad-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-233.14475.56" />
+      </set>
+    </attachedChunks>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -57,6 +81,7 @@
       <updated>1708682486868</updated>
       <workItem from="1708682490277" duration="1165000" />
       <workItem from="1708684003552" duration="1370000" />
+      <workItem from="1709200733830" duration="1392000" />
     </task>
     <servers />
   </component>
