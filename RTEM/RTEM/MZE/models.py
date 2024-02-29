@@ -1,40 +1,34 @@
 from django.db import models
+import uuid
 
 
-class Location(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Sensor(models.Model):
-    identifier = models.CharField(max_length=100, unique=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='sensors')
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.identifier
+def generate_default_serial_number():
+    return uuid.uuid4().hex  # Generuje unikalny identyfikator
 
 
 class Device(models.Model):
-    name = models.CharField(max_length=100)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='devices')
-    sensors = models.ManyToManyField(Sensor, related_name='devices')
+    serial_number = models.CharField(max_length=100, unique=True, default=generate_default_serial_number)
+    type = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.type} - {self.serial_number}"
 
 
-class EnergyConsumptionRecord(models.Model):
-    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='consumption_records')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    energy_consumed = models.FloatField()  # wartość w kWh
-    frequency = models.FloatField(null=True, blank=True, help_text="Frequency in Hz")  # Częstotliwość w Hz, może być null
-    resistance = models.FloatField(null=True, blank=True, help_text="Resistance in Ohms")  # Rezystancja w Omach, może być null
-    voltage = models.FloatField(null=True, blank=True, help_text="Voltage in Volts")  # Napięcie w Voltach, może być null
-    temperature = models.FloatField(null=True, blank=True, help_text="Temperature in Celsius")  # Temperatura w stopniach Celsjusza, może być null
+
+class TemperatureMeasurement(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, related_name='temperature_measurements')
+    temperature = models.FloatField()
+    measurement_date = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f"{self.sensor.identifier} - {self.timestamp} - {self.energy_consumed}kWh"
+        return f"Temperature {self.temperature}°C for {self.device.serial_number} on {self.measurement_date}"
+
+
+class VoltageMeasurement(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE, related_name='voltage_measurements')
+    voltage = models.FloatField()
+    measurement_date = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Voltage {self.voltage}V for {self.device.serial_number} on {self.measurement_date}"
