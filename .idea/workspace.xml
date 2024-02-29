@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment="STATRR">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RTEM/RTEM/MZE/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/admin.py" afterDir="false" />
+    <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/RTEM/RTEM/MZE/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/models.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -35,6 +32,20 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "GrzegorzTwicz"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="11f4c669-d8f9-4158-bd41-dda2c84bbb91" />
+        <option name="url" value="https://github.com/GrzegorzTwicz/Naukolatek_RTEM.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -86,7 +97,7 @@
       <workItem from="1708682490277" duration="1165000" />
       <workItem from="1708684003552" duration="1370000" />
       <workItem from="1709200733830" duration="1392000" />
-      <workItem from="1709204050102" duration="2256000" />
+      <workItem from="1709204050102" duration="2588000" />
     </task>
     <task id="LOCAL-00001" summary="STATRR">
       <option name="closed" value="true" />
@@ -104,7 +115,15 @@
       <option name="project" value="LOCAL" />
       <updated>1709205452442</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary=".">
+      <option name="closed" value="true" />
+      <created>1709206389279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709206389279</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -124,6 +143,7 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="STATRR" />
-    <option name="LAST_COMMIT_MESSAGE" value="STATRR" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
