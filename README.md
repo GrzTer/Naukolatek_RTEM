@@ -5,7 +5,7 @@
 # Każdy nowo zaczęty issue: 
 - Clon/Pull
 - RÓB NOWY BRANCH
-- Zmiana w plikach models.py = python manage.py makemigrations (APPname)
+- Zmiana w plikach models.py = ```python manage.py makemigrations```
 ## Funkcje do zrobienia:
 - (MZE)Monitorowanie Zużycia Energetycznego: Wykorzystamy zaawansowane czujniki i technologię IoT do śledzenia zużycia energii elektrycznej na różnych poziomach, od pojedynczych urządzeń po całe budynki. 
 - (PZ)Prognozowanie Zużycia: Zastosujemy algorytmy uczenia maszynowego, takie jak TensorFlow, do prognozowania przyszłego zużycia energii na podstawie danych historycznych i bieżących trendów. 
@@ -25,6 +25,7 @@
 - Dezaktywacja środowiska: ```deactivate``` / Windows
 - [CheatSheet](https://docs.google.com/document/d/1z2Mm_dkT3-zRV_uZ3sOxd9jDH--bTU4HZxVyXrb-sHo/edit?pli=1)
 - ```pip install -r requirements.txt```
+- ```python manage.py makemigrations```
 ---
 Superuser:
 - Username: admin
