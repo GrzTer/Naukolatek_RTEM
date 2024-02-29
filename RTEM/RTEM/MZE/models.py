@@ -31,6 +31,10 @@ class EnergyConsumptionRecord(models.Model):
     sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='consumption_records')
     timestamp = models.DateTimeField(auto_now_add=True)
     energy_consumed = models.FloatField()  # wartość w kWh
+    frequency = models.FloatField(null=True, blank=True, help_text="Frequency in Hz")  # Częstotliwość w Hz, może być null
+    resistance = models.FloatField(null=True, blank=True, help_text="Resistance in Ohms")  # Rezystancja w Omach, może być null
+    voltage = models.FloatField(null=True, blank=True, help_text="Voltage in Volts")  # Napięcie w Voltach, może być null
+    temperature = models.FloatField(null=True, blank=True, help_text="Temperature in Celsius")  # Temperatura w stopniach Celsjusza, może być null
 
     def __str__(self):
         return f"{self.sensor.identifier} - {self.timestamp} - {self.energy_consumed}kWh"
