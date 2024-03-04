@@ -4,7 +4,7 @@ from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
 
 def load_and_preprocess_data(filepath):
-    df = pd.read_csv(filepath)                  # Jak tu pobierać dane???
+    df = pd.read_csv(filepath)                  # Jak tu pobierać dane???                               To wogóle jest dobrze napisane????
     data = df['energy_consumption'].values.reshape(-1, 1)
     scaler = MinMaxScaler(feature_range=(0, 1))
     data_normalized = scaler.fit_transform(data)
