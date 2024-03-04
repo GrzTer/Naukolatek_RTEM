@@ -1,6 +1,6 @@
 # oz/models.py
 from django.db import models
-from MZE.models import Device
+# from MZE.models import Device # JAK TO POBRAĆ?
 
 
 class OptimizationSuggestion(models.Model):
