@@ -18,10 +18,10 @@ from django import views
 from django.contrib import admin
 from django.urls import path
 from RTEM.RTEM.MZE.views import collect_sensor_data
-from RTEM.RTEM.PZ.views import predict_consumption
+from RTEM.RTEM.PZ.views import upload_and_forecast
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('collect/', views.collect_sensor_data, name='collect_sensor_data'),
-    path('predict/', views.predict_consumption, name='predict_consumption'),
+    path('forecast/', views.upload_and_forecast, name='forecast'),
 ]

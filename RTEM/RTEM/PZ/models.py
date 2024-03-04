@@ -1,32 +1,25 @@
-# pz/models.py
-from django.db import models
-from ..MZE.models import Device
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler
 import tensorflow as tf
-from tensorflow.keras.models import Sequential
-from tensorflow.keras.layers import Dense, LSTM
 
+def load_and_preprocess_data(filepath):
+    df = pd.read_csv(filepath)                  # Jak tu pobierać dane???
+    data = df['energy_consumption'].values.reshape(-1, 1)
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    data_normalized = scaler.fit_transform(data)
+    return data_normalized, scaler, df
 
-def create_model(input_shape):
-    model = Sequential([
-        LSTM(50, return_sequences=True, input_shape=input_shape),
-        LSTM(50),
-        Dense(1)
-    ])
-    model.compile(optimizer='adam', loss='mse')
-    return model
+def create_sequences(data, time_steps=24):
+    X, y = [], []
+    for i in range(len(data) - time_steps):
+        X.append(data[i:(i + time_steps)])
+        y.append(data[i + time_steps])
+    return np.array(X), np.array(y)
 
-
-def train_and_save_model(X_train, y_train, X_val, y_val, model_path='forecasting_model.h5'):
-    model = create_model((X_train.shape[1], X_train.shape[2]))
-    model.fit(X_train, y_train, validation_data=(X_val, y_val), epochs=50, batch_size=72)
-    model.save(model_path)
-
-
-class ForecastData(models.Model):
-    device = models.ForeignKey(Device, on_delete=models.CASCADE)
-    timestamp = models.DateTimeField()
-    predicted_usage = models.FloatField()  # Prognozowane zużycie energii w kWh
-    confidence_interval = models.FloatField()  # Interval ufności prognozy
-
-    def __str__(self):
-        return f"{self.device.serial_number} - {self.timestamp} - {self.predicted_usage}"
+def forecast(model, recent_data, scaler, time_steps=24):
+    recent_data_scaled = scaler.transform(recent_data.reshape(-1, 1))
+    X_recent = recent_data_scaled.reshape(1, time_steps, 1)
+    prediction_scaled = model.predict(X_recent)
+    prediction = scaler.inverse_transform(prediction_scaled)
+    return prediction
