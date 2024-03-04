@@ -4,6 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
+<<<<<<< Updated upstream
     <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/migrations/0001_initial.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/migrations/0002_energyconsumptionrecord_frequency_and_more.py" afterDir="false" />
@@ -2546,6 +2547,10 @@
       <change beforePath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.html" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RTEM/env/Scripts/django-admin.exe" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Scripts/django-admin.exe" afterDir="false" />
+=======
+    <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment=".">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+>>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -2578,11 +2583,21 @@
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
     &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
+<<<<<<< Updated upstream
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
     &quot;git-widget-placeholder&quot;: &quot;1__0&quot;,
     &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/Naukolatek_RTEM&quot;,
+=======
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;1__Grzegorz&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/MZE-0_1&quot;,
+>>>>>>> Stashed changes
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
@@ -2610,8 +2625,66 @@
       <workItem from="1708682490277" duration="1165000" />
       <workItem from="1708684003552" duration="1370000" />
       <workItem from="1709200733830" duration="1392000" />
+<<<<<<< Updated upstream
       <workItem from="1709204050102" duration="1057000" />
     </task>
+=======
+      <workItem from="1709204050102" duration="7396000" />
+      <workItem from="1709218221235" duration="57000" />
+      <workItem from="1709218692458" duration="704000" />
+      <workItem from="1709536823027" duration="5174000" />
+      <workItem from="1709547833223" duration="654000" />
+    </task>
+    <task id="LOCAL-00001" summary="STATRR">
+      <option name="closed" value="true" />
+      <created>1709205434801</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709205434801</updated>
+    </task>
+    <task id="LOCAL-00002" summary="STATRR">
+      <option name="closed" value="true" />
+      <created>1709205452442</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709205452442</updated>
+    </task>
+    <task id="LOCAL-00003" summary=".">
+      <option name="closed" value="true" />
+      <created>1709206389279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709206389279</updated>
+    </task>
+    <task id="LOCAL-00004" summary=".">
+      <option name="closed" value="true" />
+      <created>1709207057917</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709207057917</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Poprawka MZE, PZ">
+      <option name="closed" value="true" />
+      <created>1709540471182</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1709540471182</updated>
+    </task>
+    <task id="LOCAL-00006" summary=".">
+      <option name="closed" value="true" />
+      <created>1709548696885</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1709548696885</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
+>>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2630,5 +2703,13 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+<<<<<<< Updated upstream
+=======
+    <MESSAGE value="STATRR" />
+    <MESSAGE value=".EHGHH" />
+    <MESSAGE value="Poprawka MZE, PZ" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
+>>>>>>> Stashed changes
   </component>
 </project>
