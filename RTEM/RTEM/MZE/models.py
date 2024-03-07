@@ -1,40 +1,28 @@
+# mze/models.py
 from django.db import models
+from django.utils.timezone import now
+import uuid
 
 
-class Location(models.Model):
-    name = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.name
-
-
-class Sensor(models.Model):
-    identifier = models.CharField(max_length=100, unique=True)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='sensors')
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return self.identifier
+def generate_serial_number():
+    timestamp = now().strftime('%Y%m%d%H%M%S')
+    unique_id = uuid.uuid4().hex[:6]
+    return f"{timestamp}-{unique_id}"
 
 
 class Device(models.Model):
-    name = models.CharField(max_length=100)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='devices')
-    sensors = models.ManyToManyField(Sensor, related_name='devices')
+    serial_number = models.CharField(max_length=100, unique=True, default=generate_serial_number)
+    type = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
 
     def __str__(self):
-        return self.name
+        return f"{self.type} - {self.serial_number}"
 
 
-class EnergyConsumptionRecord(models.Model):
-    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE, related_name='consumption_records')
-    timestamp = models.DateTimeField(auto_now_add=True)
-    energy_consumed = models.FloatField()  # wartość w kWh
-    frequency = models.FloatField(null=True, blank=True, help_text="Frequency in Hz")  # Częstotliwość w Hz, może być null
-    resistance = models.FloatField(null=True, blank=True, help_text="Resistance in Ohms")  # Rezystancja w Omach, może być null
-    voltage = models.FloatField(null=True, blank=True, help_text="Voltage in Volts")  # Napięcie w Voltach, może być null
-    temperature = models.FloatField(null=True, blank=True, help_text="Temperature in Celsius")  # Temperatura w stopniach Celsjusza, może być null
+class SensorData(models.Model):
+    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+    timestamp = models.DateTimeField()
+    energy_usage = models.FloatField()  # Zużycie energii w kWh
 
     def __str__(self):
-        return f"{self.sensor.identifier} - {self.timestamp} - {self.energy_consumed}kWh"
+        return f"{self.device.serial_number} - {self.timestamp} - {self.energy_usage}"

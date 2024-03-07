@@ -4,7 +4,6 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-<<<<<<< Updated upstream
     <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment="">
       <change afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/migrations/0001_initial.py" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/RTEM/RTEM/MZE/migrations/0002_energyconsumptionrecord_frequency_and_more.py" afterDir="false" />
@@ -2547,23 +2546,56 @@
       <change beforePath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.html" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.txt" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Lib/site-packages/django/views/templates/technical_500.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RTEM/env/Scripts/django-admin.exe" beforeDir="false" afterPath="$PROJECT_DIR$/RTEM/env/Scripts/django-admin.exe" afterDir="false" />
-=======
     <list default="true" id="1cf24c43-3429-4908-b1a5-e9af22a5a8b5" name="Changes" comment=".">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
->>>>>>> Stashed changes
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
+    <favorite-branches>
+      <branch-storage>
+        <map>
+          <entry type="LOCAL">
+            <value>
+              <list>
+                <branch-info repo="$PROJECT_DIR$" source="1_0" />
+              </list>
+            </value>
+          </entry>
+        </map>
+      </branch-storage>
+    </favorite-branches>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="1_0" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;GrzegorzTwicz&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="11f4c669-d8f9-4158-bd41-dda2c84bbb91" />
+        <option name="url" value="https://github.com/GrzegorzTwicz/Naukolatek_RTEM.git" />
+      </UrlAndAccount>
+    </option>
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -2580,33 +2612,24 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-<<<<<<< Updated upstream
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;1__0&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/Naukolatek_RTEM&quot;,
-=======
-    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;1__Grzegorz&quot;,
-    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Admin/Desktop/MZE-0_1&quot;,
->>>>>>> Stashed changes
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
-  }
-}</component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "DefaultHtmlFileTemplate": "HTML File",
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "1__Grzegorz",
+    "ignore.virus.scanning.warn.message": "true",
+    "last_opened_file_path": "C:/Users/Admin/Desktop/MZE-0_1",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
+    "vue.rearranger.settings.migration": "true"}]]>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -2625,10 +2648,44 @@
       <workItem from="1708682490277" duration="1165000" />
       <workItem from="1708684003552" duration="1370000" />
       <workItem from="1709200733830" duration="1392000" />
-<<<<<<< Updated upstream
-      <workItem from="1709204050102" duration="1057000" />
+      <workItem from="1709204050102" duration="7396000" />
+      <workItem from="1709218221235" duration="57000" />
+      <workItem from="1709218692458" duration="704000" />
+      <workItem from="1709536823027" duration="2368000" />
     </task>
-=======
+    <task id="LOCAL-00001" summary="STATRR">
+      <option name="closed" value="true" />
+      <created>1709205434801</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1709205434801</updated>
+    </task>
+    <task id="LOCAL-00002" summary="STATRR">
+      <option name="closed" value="true" />
+      <created>1709205452442</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1709205452442</updated>
+    </task>
+    <task id="LOCAL-00003" summary=".">
+      <option name="closed" value="true" />
+      <created>1709206389279</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1709206389279</updated>
+    </task>
+    <task id="LOCAL-00004" summary=".">
+      <option name="closed" value="true" />
+      <created>1709207057917</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1709207057917</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
       <workItem from="1709204050102" duration="7396000" />
       <workItem from="1709218221235" duration="57000" />
       <workItem from="1709218692458" duration="704000" />
@@ -2684,7 +2741,6 @@
       <updated>1709548696885</updated>
     </task>
     <option name="localTasksCounter" value="7" />
->>>>>>> Stashed changes
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -2703,13 +2759,14 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
-<<<<<<< Updated upstream
-=======
+    <MESSAGE value="STATRR" />
+    <MESSAGE value="." />
+    <MESSAGE value=".EHGHH" />
+    <option name="LAST_COMMIT_MESSAGE" value=".EHGHH" />
     <MESSAGE value="STATRR" />
     <MESSAGE value=".EHGHH" />
     <MESSAGE value="Poprawka MZE, PZ" />
     <MESSAGE value="." />
     <option name="LAST_COMMIT_MESSAGE" value="." />
->>>>>>> Stashed changes
   </component>
 </project>
