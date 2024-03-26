@@ -29,7 +29,7 @@
 ---
 # Przydatne komendy
 ### Django
-- Aktywacja środowiska: ```env\Scripts\activate``` / Windows
+- Aktywacja środowiska: ```.\env\Scripts\activate``` / Windows
 - Dezaktywacja środowiska: ```deactivate``` / Windows
 - [CheatSheet](https://docs.google.com/document/d/1z2Mm_dkT3-zRV_uZ3sOxd9jDH--bTU4HZxVyXrb-sHo/edit?pli=1)
 - ```pip install -r requirements.txt```
