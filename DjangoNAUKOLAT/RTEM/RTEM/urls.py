@@ -17,6 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from Home.views import home_view
+from MZE.views import Device_list
+
 urlpatterns = [
-    path('admin/', admin.site.urls),
+  path("admin/", admin.site.urls),
+  path("", home_view),
+  path("Device", Device_list, name='Device_list'),
+
 ]

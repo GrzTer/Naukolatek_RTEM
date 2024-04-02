@@ -1,0 +1,17 @@
+<div>
+  <table>
+    <tr>
+      <th>Tytuł</th>
+      <th>Autor</th>
+      <th>Opis</th>
+      <th>Kategoria</th>
+    </tr>
+      {% for book in books %}
+    <tr>
+        <td>{{ Device.serial_number }}</td>
+        <td>{{ Device.type }}</td>
+        <td>{{ Device.description|default:"Brak opisu" }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+</div>
