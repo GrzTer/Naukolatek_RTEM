@@ -1,7 +1,7 @@
 # mze/models.py
+import uuid
 from django.db import models
 from django.utils.timezone import now
-import uuid
 
 
 def generate_serial_number():
