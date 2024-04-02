@@ -1,0 +1,131 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: darkslategray;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    /*display: flex;*/
+    text-align: center;
+
+}
+
+h2 {
+    color: #333;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    background-color: #f7f7f7;
+    margin: 5px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.header {
+    color: #333;
+    text-align: center;
+}
+
+.sub-header {
+    color: #555;
+}
+
+.info {
+    color: #777;
+}
+
+.message {
+    color: #333;
+    font-weight: bold;
+}
+
+.user-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: #333;
+    font-weight: bold;
+}
+
+.book-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.book-table th, .book-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+.book-table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.book-table tbody tr:hover {
+    background-color: #f5f5f5;
+}
+
+.navigation-container {
+    display: flex;
+    align-items: center; /* Align items vertically in the center */
+    justify-content: space-between; /* Distribute items evenly across the container */
+    background-color: #333; /* Background color for the navbar */
+    padding: 10px; /* Add padding for spacing */
+}
+
+/* Styling for each navigation item */
+.navigation {
+    /* Remove margin for better spacing */
+}
+
+/* Styling for the buttons */
+.navigation button {
+    background-color: #3498db;
+    border: none;
+    color: white;
+    padding: 10px 15px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    cursor: pointer;
+    border-radius: 5px; /* Add border-radius for a rounded appearance */
+}
+
+/* Styling for the links within the buttons */
+.navigation button a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Hover effect for the buttons */
+.navigation button:hover {
+    background-color: #2980b9;
+}
+
+/* Responsive adjustments */
+@media screen and (max-width: 768px) {
+    .navigation-container {
+        flex-direction: column; /* Stack items vertically on small screens */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    .navigation {
+        margin-bottom: 10px; /* Add margin between stacked items */
+    }
+}

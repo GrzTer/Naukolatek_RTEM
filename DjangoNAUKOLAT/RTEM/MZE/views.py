@@ -1,11 +1,11 @@
 from django.shortcuts import render
 
-from RTEM.MZE.models import Device
+from MZE.models import Device
 
 
 def Device_list(request):
-    all_books = Device.serial_number.all()
+    all_devices = Device.serial_number
     context = {
-        'devices': all_books
+        'devices': all_devices
     }
     return render(request, 'Device_list.html', context=context)

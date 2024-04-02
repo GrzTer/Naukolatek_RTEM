@@ -1,12 +1,11 @@
 <div>
   <table>
     <tr>
-      <th>Tytuł</th>
-      <th>Autor</th>
+      <th>Numer Serii</th>
+      <th>Typ</th>
       <th>Opis</th>
-      <th>Kategoria</th>
     </tr>
-      {% for book in books %}
+      {% for Device in MZE %}
     <tr>
         <td>{{ Device.serial_number }}</td>
         <td>{{ Device.type }}</td>

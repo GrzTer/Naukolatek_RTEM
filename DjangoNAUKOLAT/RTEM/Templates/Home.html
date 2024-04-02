@@ -1,3 +1,31 @@
-<h1>Strona główna</h1>
-
-<p>Witaj na stronie internetowej naszej księgarni </p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" content="width=device-width, initial-scale=1, shrink-to-fit=no" name="viewport">
+    {% load static %}
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" rel="stylesheet">
+    <link href="{% static 'main.css' %}" rel="stylesheet">
+    <style>
+        .btn-group-toggle a {
+            color: inherit;
+            text-decoration: none;
+        }
+    </style>
+    <title>Strona główna</title>
+</head>
+<body>
+<header class="header">
+    {% include 'navbar.html' %}
+</header>
+<div class="container">
+    <h1 class="header"><span class="badge badge-light">Strona główna</span></h1>
+    <p class="info">{{ message }}: <span class="message">{{ request.user }}</span></p>
+    <div class="btn-group btn-group-toggle text-decoration-none link-light" data-toggle="buttons">
+        <label class="btn btn-dark ">
+            <input autocomplete="off"  name="options" type="radio">
+        </label>
+    </div>
+</div>
+</body>
+</html>
