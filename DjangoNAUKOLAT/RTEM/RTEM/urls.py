@@ -23,5 +23,5 @@ from MZE.views import Device_list
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home_view),
-    path("Device", Device_list, name="Device_list"),
+    path("Devices", Device_list, name="Device_list"),
 ]

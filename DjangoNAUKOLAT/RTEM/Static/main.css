@@ -1,12 +1,12 @@
 html, body { height: 100%; margin: 0; font-family: 'Arial', sans-serif; }
 body { display: flex; flex-direction: column;}
-.sticky-navbar { position: sticky; top: 0; z-index: 1000;  }
+.sticky-navbar { position: sticky; top: 0; z-index: 1080;  }
 .active-nav-link { color: #007bff; font-weight: bold; }
 .hero-background { background: url('path/to/dynamic-background.jpg') no-repeat center center; background-size: cover; }
 .btn-primary { background-color: #007bff; border-color: #007bff; }
 .btn-primary:hover { background-color: #0056b3; border-color: #004085; }
 .card:hover { transform: scale(1.05); }
-.navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1000; background-color: #f8f9fa;}
+.navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1080; background-color: #f8f9fa;}
 .navbar-brand { position: absolute; left: 1rem;}
 .content { flex: 1;}
-.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 20px; display: flex; justify-content: space-between; align-items: center;  text-align: center;}
+.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
