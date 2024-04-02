@@ -5,13 +5,15 @@ from django.utils.timezone import now
 
 
 def generate_serial_number():
-    timestamp = now().strftime('%Y%m%d%H%M%S')
+    timestamp = now().strftime("%Y%m%d%H%M%S")
     unique_id = uuid.uuid4().hex[:6]
     return f"{timestamp}-{unique_id}"
 
 
 class Device(models.Model):
-    serial_number = models.CharField(max_length=100, unique=True, default=generate_serial_number)
+    serial_number = models.CharField(
+        max_length=100, unique=True, default=generate_serial_number
+    )
     type = models.CharField(max_length=100)
     description = models.TextField(blank=True)
 

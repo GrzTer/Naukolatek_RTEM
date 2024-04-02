@@ -9,4 +9,4 @@ body { display: flex; flex-direction: column;}
 .navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1000; background-color: #f8f9fa;}
 .navbar-brand { position: absolute; left: 1rem;}
 .content { flex: 1;}
-.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 20px; display: flex; justify-content: space-between; align-items: center;  text-align: center; margin: 50px }
+.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 20px; display: flex; justify-content: space-between; align-items: center;  text-align: center;}

@@ -5,7 +5,5 @@ from MZE.models import Device
 
 def Device_list(request):
     all_devices = Device.serial_number
-    context = {
-        'devices': all_devices
-    }
-    return render(request, 'Device_list.html', context=context)
+    context = {"devices": all_devices}
+    return render(request, "Device_list.html", context=context)

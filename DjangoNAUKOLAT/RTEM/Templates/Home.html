@@ -46,16 +46,20 @@
                 </div>
             </div>
         </div>
+{#        <div class="chart-container" style="position: relative; height:40vh; width:80vw">#}
+{#            <canvas id="energyConsumptionChart"></canvas>#}
+{#        </div>#}
     </div>
 </div>
 
-<div class="fixed-bottom">
+<div >
     {% include 'footer.html' %}
 </div>
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+{#<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>         Chartss#}
 <script>
     // Example JavaScript for active link highlighting
     $(document).ready(function () {
@@ -64,6 +68,38 @@
             $(this).addClass('active-nav-link');
         });
     });
+    {#var ctx = document.getElementById('energyConsumptionChart').getContext('2d');#}
+    {#var energyConsumptionChart = new Chart(ctx, {#}
+    {#    type: 'line', // Change type as needed#}
+    {#    data: {#}
+    {#        labels: ['January', 'February', 'March', 'April'], // Example labels#}
+    {#        datasets: [{#}
+    {#            label: 'Energy Consumption',#}
+    {#            data: [65, 59, 80, 81], // Placeholder data#}
+    {#            fill: false,#}
+    {#            borderColor: 'rgb(75, 192, 192)',#}
+    {#            tension: 0.1#}
+    {#        }]#}
+    {#    },#}
+    {#    options: {#}
+    {#        scales: {#}
+    {#            y: {#}
+    {#                beginAtZero: true#}
+    {#            }#}
+    {#        }#}
+    {#    }#}
+
+    {#                ^#}
+    {#Chart function  |#}
+
+    {#if ('serviceWorker' in navigator) {#}
+    {#window.addEventListener('load', () => {#}
+    {#    navigator.serviceWorker.register('/serviceWorker.js').then(registration => {#}
+    {#        console.log('ServiceWorker registration successful with scope: ', registration.scope);#}
+    {#    }, err => {#}
+    {#        console.log('ServiceWorker registration failed: ', err);#}
+    {#    });#}
+
 </script>
 
 </body>
