@@ -2,40 +2,25 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Chart from CSV</title>
-    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    {% load static %}
+    <title>Brush Chart</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}"> <!-- Ensure your CSS is properly set up -->
+    <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
 </head>
 <body>
-
-<div id="chart"></div>
-
-<script>
-    var options = {
-        chart: {
-            type: 'line', // Use a line chart
-            height: 'auto'
-        },
-        series: {{ chart_data.series|safe }},
-        xaxis: {
-            type: 'datetime', // Specify that x-axis uses datetime values
-            tickAmount: 10, // Adjust based on your data's range
-        },
-        tooltip: {
-            x: {
-                format: 'dd MMM yyyy HH:mm' // Adjust date format as needed
-            }
-        },
-        stroke: {
-            curve: 'smooth'
-        },
-        dataLabels: {
-            enabled: false
-        }
-    };
-
-    var chart = new ApexCharts(document.querySelector("#chart"), options);
-    chart.render();
+    <div id="wrapper">
+        <!-- Ensure the IDs match what your JavaScript expects -->
+        <div id="chart-area"></div>
+        <div id="chart-bar"></div>
+    </div>
+<script type="text/javascript">
+    // Use the globalChartData passed from Django view
+    var globalChartData = JSON.parse('{{ globalChartData|safe }}');
 </script>
+                                                                            <!--        !!!!!!!!TO NIE MOJE DANE SĄ WYŚWIETLANE!!!!!!!              -->
 
+    <script src="{% static 'index.js' %}"></script>
+    <!-- Make sure the path to index.js is correct -->
 </body>
 </html>
+
