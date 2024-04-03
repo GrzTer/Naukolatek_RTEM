@@ -8,6 +8,7 @@
 # FrontEnd/BackEnd:
 - [ ] favicon,
 - [ ] !!!!!!!!!!!                    Analiza Priorytetów                 !!!!!!!!!!!
+- [ ] Refaktor palety kolorów
 - [ ] ikony do funkcji,
 - [ ] O Projekcie (Rzetelny opis projektu),
 - [ ] Funkcje (Strona Dla Każdej z funkcji),
