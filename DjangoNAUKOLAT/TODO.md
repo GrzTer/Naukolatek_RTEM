@@ -6,7 +6,7 @@
 - [ ] OZ
 ---
 # FrontEnd/BackEnd:
-- [ ] favicon,
+- [x] favicon,
 - [ ] !!!!!!!!!!!                    Analiza Priorytetów                 !!!!!!!!!!!
 - [ ] Refaktor palety kolorów
 - [ ] ikony do funkcji,
