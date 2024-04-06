@@ -1,9 +1,14 @@
 from django.shortcuts import render
+from .models import EnergyConsumption
+import json
+from django.core.serializers.json import DjangoJSONEncoder
 
-from MZE.models import Device
+def chart_view(request):
+    # Query your model for the data
+    queryset = EnergyConsumption.objects.all().order_by('timestamp')
+    data = list(queryset.values('timestamp', 'energy_consumption'))
 
+    # Convert data to JSON format
+    chart_data = json.dumps(data, cls=DjangoJSONEncoder)
 
-def Device_list(request):
-    all_devices = Device.serial_number
-    context = {"devices": all_devices}
-    return render(request, "Device_list.html", context=context)
+    return render(request, 'MZE.html', {'chart_data': chart_data})

@@ -17,8 +17,11 @@
       <sourceFolder url="file://$MODULE_DIR$/RTEM" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/env" />
     </content>
-    <orderEntry type="inheritedJdk" />
+    <orderEntry type="jdk" jdkName="Python 3.11" jdkType="Python SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+  <component name="PackageRequirementsSettings">
+    <option name="removeUnused" value="true" />
   </component>
   <component name="PyDocumentationSettings">
     <option name="format" value="PLAIN" />

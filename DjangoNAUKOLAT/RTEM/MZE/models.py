@@ -1,30 +1,26 @@
-# mze/models.py
-import uuid
 from django.db import models
-from django.utils.timezone import now
 
-
-def generate_serial_number():
-    timestamp = now().strftime("%Y%m%d%H%M%S")
-    unique_id = uuid.uuid4().hex[:6]
-    return f"{timestamp}-{unique_id}"
-
-
-class Device(models.Model):
-    serial_number = models.CharField(
-        max_length=100, unique=True, default=generate_serial_number
-    )
-    type = models.CharField(max_length=100)
-    description = models.TextField(blank=True)
-
-    def __str__(self):
-        return f"{self.type} - {self.serial_number}"
-
-
-class SensorData(models.Model):
-    device = models.ForeignKey(Device, on_delete=models.CASCADE)
+# Each model maps to a single database table.
+# The EnergyConsumption model will have a corresponding table in the database
+# that stores energy consumption data for various devices.
+class EnergyConsumption(models.Model):
+    # Define fields for the model. Each field corresponds to a database column.
+    device_id = models.IntegerField()
     timestamp = models.DateTimeField()
-    energy_usage = models.FloatField()  # Zużycie energii w kWh
+    energy_consumption = models.FloatField()
 
+    # This method returns a human-readable string representation of the object.
+    # It's useful for debugging and in the Django admin.
     def __str__(self):
-        return f"{self.device.serial_number} - {self.timestamp} - {self.energy_usage}"
+        # Customize the string representation of EnergyConsumption instances
+        return f"Device {self.device_id} at {self.timestamp} - {self.energy_consumption} kWh"
+
+    # Meta options - these are optional and used to define metadata for your model
+    class Meta:
+        # Human-readable name of the model in the Django admin
+        verbose_name = "Energy Consumption"
+        # Human-readable plural name of the model in the Django admin
+        verbose_name_plural = "Energy Consumptions"
+        # Optional: Ordering of the records when querying the database
+        # Here, records are ordered by timestamp in descending order
+        ordering = ['-timestamp']

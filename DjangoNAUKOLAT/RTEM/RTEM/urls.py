@@ -18,11 +18,11 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Home.views import home_view, about_view
-from MZE.views import Device_list
-
+from MZE.views import chart_view
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", home_view, name="home_view"),
-    path("Devices", Device_list, name="Device_list"),
+    path("", home_view),
+    path('MZE/', chart_view, name='chart_view'),
     path("about/",about_view,name="about_view"),
 ]
+
