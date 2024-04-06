@@ -15,9 +15,8 @@
     </div>
 <script type="text/javascript">
     // Use the globalChartData passed from Django view
-    var globalChartData = JSON.parse('{{ globalChartData|safe }}');
+    var globalChartData = JSON.parse('{{ chart_data | safe }}');
 </script>
-                                                                            <!--        !!!!!!!!TO NIE MOJE DANE SĄ WYŚWIETLANE!!!!!!!              -->
 
     <script src="{% static 'index.js' %}"></script>
     <!-- Make sure the path to index.js is correct -->
