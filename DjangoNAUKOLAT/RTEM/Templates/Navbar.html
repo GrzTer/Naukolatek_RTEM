@@ -1,10 +1,11 @@
+
 <header class="sticky-navbar">
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <a class="navbar-brand" href="#">RealTimeEnergyManager</a>
         <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContents">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Strona Główna<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href=" {% url 'home_view'  %}">Strona Główna<span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -24,7 +25,7 @@
                     <a class="nav-link" href="Devices">Lista Urządzeń</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="O%20Projekcie.html">O Projekcie</a>
+                    <a class="nav-link" href="{% url 'about_view' %}">O Projekcie</a>
                 </li>
             </ul>
         </div>
