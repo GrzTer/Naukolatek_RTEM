@@ -10,7 +10,7 @@
 - [ ] !!!!!!!!!!!                    Analiza Priorytetów                 !!!!!!!!!!!
 - [ ] Refaktor palety kolorów
 - [ ] ikony do funkcji,
-- [ ] O Projekcie (Rzetelny opis projektu),
+- [ ] O Projekcie (Rzetelny opis projektu), - 50%
 - [ ] Funkcje (Strona Dla Każdej z funkcji),
 - [ ] Lista Urządzeń (Ładna tabelka z Urządzeniami wypisanymi),
 - [ ] Strona Główna (detale)
