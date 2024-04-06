@@ -3,27 +3,18 @@
 <head>
     <meta charset="UTF-8">
     {% load static %}
-    <title>Brush Chart</title>
-    <link rel="stylesheet" href="{% static 'main.css' %}"> <!-- Ensure your CSS is properly set up -->
+    <title>Dynamic Chart</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
 </head>
 <body>
-    <div id="wrapper">
-        <!-- Ensure the IDs match what your JavaScript expects -->
-        <div id="chart-area"></div>
-        <div id="chart-bar"></div>
-    </div>
-    <div>
-        plt.show
-    </div>
+    <div id="chart-area"></div> <!-- Placeholder for the first chart -->
+    <div id="chart-bar"></div>   <!-- Placeholder for the second chart -->
+    <div id="chart-pie"></div>   <!-- Placeholder for the third chart -->
 
-<script type="text/javascript">
-    // Use the globalChartData passed from Django view
-    var globalChartData = JSON.parse('{{ chart_data | safe }}');
-</script>
-
+    <script type="text/javascript">
+        var globalChartData = JSON.parse('{{ chart_data | safe }}');
+    </script>
     <script src="{% static 'index.js' %}"></script>
-    <!-- Make sure the path to index.js is correct -->
 </body>
 </html>
-
