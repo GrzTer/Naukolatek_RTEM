@@ -2,7 +2,6 @@ from django.shortcuts import render
 import pandas as pd
 import numpy as np
 import tensorflow as tf
-from keras.src.saving.saving_lib import load_model
 from sklearn.preprocessing import MinMaxScaler
 
 
@@ -28,7 +27,7 @@ def forecast_energy(request):
 
     # Load the trained model
     model_path = "PZ/model_checkpoint.h5"
-    model = load_model(model_path)
+    model = tf.keras.models.load_model(model_path)
 
     # Make predictions
     predictions = model.predict(x_test)
