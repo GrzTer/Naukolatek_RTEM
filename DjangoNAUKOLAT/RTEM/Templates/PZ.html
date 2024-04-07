@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Energy Consumption Forecast</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="forecastChart"></canvas>
+    <script>
+        var ctx = document.getElementById('forecastChart').getContext('2d');
+        var forecastedValue = {{ forecasted_value|safe }};
+        var chart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ['Forecasted Consumption'],
+                datasets: [{
+                    label: 'Energy Consumption',
+                    data: [forecastedValue],
+                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                    borderColor: 'rgba(255, 99, 132, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

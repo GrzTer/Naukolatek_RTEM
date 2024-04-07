@@ -4,25 +4,31 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='EnergyConsumption',
+            name="EnergyConsumption",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('device_id', models.IntegerField()),
-                ('timestamp', models.DateTimeField()),
-                ('energy_consumption', models.FloatField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("device_id", models.IntegerField()),
+                ("timestamp", models.DateTimeField()),
+                ("energy_consumption", models.FloatField()),
             ],
             options={
-                'verbose_name': 'Energy Consumption',
-                'verbose_name_plural': 'Energy Consumptions',
-                'ordering': ['-timestamp'],
+                "verbose_name": "Energy Consumption",
+                "verbose_name_plural": "Energy Consumptions",
+                "ordering": ["-timestamp"],
             },
         ),
     ]

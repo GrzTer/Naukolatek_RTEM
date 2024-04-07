@@ -3,7 +3,8 @@ document.addEventListener("DOMContentLoaded", function() {
     var chartData = globalChartData.map(item => {
         return {
             x: new Date(item.timestamp).getTime(), // Convert timestamp to the date's millisecond representation
-            y: item.energy_consumption
+            y: item.energy_consumption,
+            device_id: item.device_id
         };
     });
 
@@ -52,7 +53,15 @@ document.addEventListener("DOMContentLoaded", function() {
             data: chartData // Use the processed chartData here
         }],
         tooltip: {
-            theme: "dark"
+            theme: "dark",
+            x: {
+                format: "dd MMM yyyy"
+            },
+            y: {
+                formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
+                    return "Consumption: " + val + "<br>Device ID: " + w.config.series[seriesIndex].data[dataPointIndex].device_id;
+                }
+            }
         },
         xaxis: {
             type: "datetime" // Ensuring the x-axis is treated as datetime
@@ -107,12 +116,21 @@ document.addEventListener("DOMContentLoaded", function() {
         xaxis: {
             type: "datetime", // Ensuring the x-axis is treated as datetime
             tooltip: {
-                enabled: false
+                theme: "dark",
+                x: {
+                    format: "dd MMM yyyy"
+                },
+                y: {
+                    formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
+                        return "Consumption: " + val + "<br>Device ID: " + w.config.series[seriesIndex].data[dataPointIndex].device_id;
+                    }
+                }
             }
         },
         yaxis: {
             tickAmount: 2 // Customize based on your data range
         }
+
     };
 
     // Initialize the second chart with the specified options

@@ -1,3 +1,0 @@
-class JaxLayer:
-    pass
-

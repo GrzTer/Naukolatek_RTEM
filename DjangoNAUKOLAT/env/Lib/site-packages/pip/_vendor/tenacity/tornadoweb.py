@@ -29,11 +29,7 @@ _RetValT = typing.TypeVar("_RetValT")
 
 
 class TornadoRetrying(BaseRetrying):
-    def __init__(
-        self,
-        sleep: "typing.Callable[[float], Future[None]]" = gen.sleep,
-        **kwargs: typing.Any,
-    ) -> None:
+    def __init__(self, sleep: "typing.Callable[[float], Future[None]]" = gen.sleep, **kwargs: typing.Any) -> None:
         super().__init__(**kwargs)
         self.sleep = sleep
 

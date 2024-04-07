@@ -1,5 +1,6 @@
 from django.db import models
 
+
 # Each model maps to a single database table.
 # The EnergyConsumption model will have a corresponding table in the database
 # that stores energy consumption data for various devices.
@@ -23,4 +24,4 @@ class EnergyConsumption(models.Model):
         verbose_name_plural = "Energy Consumptions"
         # Optional: Ordering of the records when querying the database
         # Here, records are ordered by timestamp in descending order
-        ordering = ['-timestamp']
+        ordering = ["-timestamp"]

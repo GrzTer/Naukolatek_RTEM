@@ -10,3 +10,15 @@ body { display: flex; flex-direction: column;}
 .navbar-brand { position: absolute; left: 1rem;}
 .content { flex: 1;}
 .custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
+.chart-area {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.apexcharts-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
