@@ -28,6 +28,5 @@ urlpatterns = [
     path("MZE/", chart_view, name="chart_view"),
     path("about/", about_view, name="about_view"),
     path("PZ/", predict, name="forecast_energy"),
-    path('SG/', energy_data_view, name='energy_data_view'),
-
+    path("SG/", energy_data_view, name="energy_data_view"),
 ]
