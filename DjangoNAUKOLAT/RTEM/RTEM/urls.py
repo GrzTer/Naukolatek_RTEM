@@ -20,11 +20,14 @@ from django.urls import path
 from Home.views import home_view, about_view
 from MZE.views import chart_view
 from PZ.views import forecast_energy
+from SG.views import energy_data_view
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home_view, name="home_view"),
     path("MZE/", chart_view, name="chart_view"),
     path("about/", about_view, name="about_view"),
-    path("PZ/", forecast_energy, name="forecast_energy")
+    path("PZ/", forecast_energy, name="forecast_energy"),
+    path('SG/', energy_data_view, name='energy_data_view'),
+
 ]
