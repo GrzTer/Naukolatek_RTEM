@@ -1,24 +1,37 @@
 document.addEventListener('DOMContentLoaded', function () {
+    // Parse the forecast data from the Django template
+    // Assuming forecastData is already assigned in the HTML before this script tag
+    const parsedData = JSON.parse(forecastData);
+
+    // Map the parsed data to the format Chart.js expects
+    const chartLabels = parsedData.map(data => data.timestamp);
+    const chartData = parsedData.map(data => data.energy_consumption);
+
+    // Get the context of the canvas element
     const ctx = document.getElementById('forecastChart').getContext('2d');
+
+    // Create the chart
     const forecastChart = new Chart(ctx, {
-        type: 'line',
+        type: 'line', // Line chart type
         data: {
-            labels: forecastData.labels, // Ensure these labels are moment.js compatible date strings
+            labels: chartLabels, // The timestamps
             datasets: [{
                 label: 'Forecasted Energy Consumption',
-                data: forecastData.data,
-                borderColor: 'rgb(75, 192, 192)',
-                tension: 0.00000000001
+                data: chartData, // The forecasted energy consumption data
+                borderColor: 'rgb(75, 192, 192)', // The color of the line
+                tension: 0.1 // The smoothness of the line
             }]
         },
         options: {
             scales: {
                 x: {
-                    type: 'time',
+                    type: 'time', // Make sure this matches the format of your timestamps
                     time: {
-                        parser: moment.ISO_8601, // Use ISO_8601 for universal parsing of date strings or specify your custom format
-                        tooltipFormat: 'll HH:mm', // Adjust if needed
-                        unit: 'hour'
+                        unit: 'day', // The unit of time on the x-axis
+                        tooltipFormat: 'll', // The date format of the tooltip
+                        displayFormats: {
+                            'day': 'MMM D' // Display format of the labels on x-axis
+                        }
                     },
                     title: {
                         display: true,
@@ -26,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function () {
                     }
                 },
                 y: {
-                    beginAtZero: false,
+                    beginAtZero: false, // If false, scale starts at the lowest value; if true, it starts at 0
                     title: {
                         display: true,
                         text: 'Energy Consumption (kWh)'
@@ -37,14 +50,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tooltip: {
                     callbacks: {
                         label: function(context) {
-                            let label = context.dataset.label || '';
-                            if (label) {
-                                label += ': ';
-                            }
-                            if (context.parsed.y !== null) {
-                                label += context.parsed.y.toFixed(2) + ' kWh';
-                            }
-                            return label;
+                            return context.dataset.label + ': ' + context.parsed.y.toFixed(2) + ' kWh';
                         }
                     }
                 }

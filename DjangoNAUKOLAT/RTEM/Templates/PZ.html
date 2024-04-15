@@ -15,7 +15,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
     <!-- Include the Moment.js adapter for Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
-
 </head>
 <body>
 <header class="header">
@@ -23,7 +22,7 @@
 </header>
     <div class="container mt-5">
         <h2 class="text-center mb-4">Energy Consumption Forecast</h2>
-        <div class="chart-area">
+        <div class="chart-container" style="position: relative; height:40vh; width:80vw">
             <canvas id="forecastChart"></canvas>
         </div>
     </div>
@@ -34,7 +33,7 @@
     <!-- Script to handle data and rendering -->
     <script>
         // This will hold the data passed from Django's view
-        var forecastData = {{ forecast_data|safe }};
+        var forecastData = {{ forecast_data_json|safe }};
     </script>
     <script src="{% static 'forecast-chart.js' %}"></script>
     <script src="{% static 'dropdown.js' %}"></script>

@@ -1,37 +1,41 @@
 from django.shortcuts import render
 from keras.models import load_model
 import pandas as pd
-import numpy as np
 from sklearn.preprocessing import MinMaxScaler
-import os
 import json
-
+import os
 
 def predict(request):
-    # Load data
-    df = pd.read_csv(os.path.join('PZ', 'data1.csv'), parse_dates=['timestamp'])
+    # Load the data
+    data_path = os.path.join('PZ', 'data1.csv')
+    df = pd.read_csv(data_path)
 
-    # Apply MinMaxScaler
-    scaler = MinMaxScaler()
-    df['scaled'] = scaler.fit_transform(df[['energy_consumption']])
+    # Normalize features as your model expects for input
+    scaler = MinMaxScaler(feature_range=(0, 1))
+    df['energy_consumption'] = scaler.fit_transform(df[['energy_consumption']])
 
-    # Reshape for model
-    features = np.reshape(df['scaled'].values, (-1, 1, 1))  # Example: Reshape for LSTM input
+    # Reshape data for LSTM [samples, time steps, features]
+    X_test = df['energy_consumption'].values.reshape(-1, 1, 1)
 
-    # Load your model
-    model = load_model(os.path.join('PZ', 'model_checkpoint.keras'))
+    # Load the Keras model
+    model_path = os.path.join('PZ', 'model_checkpoint.keras')
+    model = load_model(model_path)
 
     # Make predictions
-    predictions_scaled = model.predict(features)
-    predictions_scaled = np.reshape(predictions_scaled, (-1, 1))  # Reshape to 2D for inverse scaling
+    predictions_scaled = model.predict(X_test)
 
-    # Inverse transform to get actual values
-    predictions = scaler.inverse_transform(predictions_scaled)  # Invert scaling
+    # Inverse the predictions to original scale
+    predictions = scaler.inverse_transform(predictions_scaled.reshape(-1, 1)).flatten().tolist()
 
-    # Prepare data for chart
-    forecast_data = [{'x': time.strftime('%Y-%m-%d %H:%M:%S'), 'y': float(pred[0])} for time, pred in
-                     zip(df['timestamp'], predictions)]
+    # Preparing data for chart.js
+    # Assume you have a datetime column corresponding to each prediction.
+    # Here, I'm just creating a list of the next N hours as an example.
+    forecast_hours = pd.date_range(start=df['timestamp'].iloc[-1], periods=len(predictions), freq='H')
+    forecast_data = [{'timestamp': str(hour), 'energy_consumption': pred} for hour, pred in zip(forecast_hours,
+                                                                                                predictions)]
+
+    # Convert data to JSON
     forecast_data_json = json.dumps(forecast_data)
 
-    # Pass to template
-    return render(request, 'PZ.html', {'forecast_data': forecast_data_json})
+    # Pass the forecast data to the template
+    return render(request, 'PZ.html', {'forecast_data_json': forecast_data_json})
