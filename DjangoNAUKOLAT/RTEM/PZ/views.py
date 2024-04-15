@@ -1,4 +1,4 @@
-import numpy as np
+from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
 from keras.models import load_model
 import pandas as pd
@@ -31,12 +31,11 @@ def predict(request):
     # Preparing data for chart.js
     # Assume you have a datetime column corresponding to each prediction.
     # Here, I'm just creating a list of the next N hours as an example.
-    forecast_hours = pd.date_range(start=df['timestamp'].iloc[-1], periods=len(predictions), freq='H')
-    forecast_data = [{'timestamp': str(hour), 'energy_consumption': pred} for hour, pred in zip(forecast_hours,
-                                                                                                predictions)]
+    forecast_hours = pd.date_range(start=df['timestamp'].iloc[-1], periods=len(predictions), freq='h')
+    forecast_data = [{'timestamp': str(hour), 'energy_consumption': pred} for hour, pred in zip(forecast_hours, predictions)]
 
     # Convert data to JSON
-    forecast_data_json = json.dumps(forecast_data)
+    forecast_data_json = json.dumps(list(forecast_data), cls=DjangoJSONEncoder)
 
     # Pass the forecast data to the template
     return render(request, 'PZ.html', {'forecast_data_json': forecast_data_json})
