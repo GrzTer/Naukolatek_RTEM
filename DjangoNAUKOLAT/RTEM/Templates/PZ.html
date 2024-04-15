@@ -9,7 +9,14 @@
 <body>
     <div class="container mt-5">
         <h1>Energy Consumption Forecast</h1>
-        <table class="table table-bordered">
+
+        <div class="btn-group" role="group" aria-label="Time Range">
+            <a href="?time_range=next_day" class="btn btn-primary {% if selected_time_range == 'next_day' %}active{% endif %}">Next Day</a>
+            <a href="?time_range=next_week" class="btn btn-primary {% if selected_time_range == 'next_week' %}active{% endif %}">Next Week</a>
+            <a href="?time_range=next_month" class="btn btn-primary {% if selected_time_range == 'next_month' %}active{% endif %}">Next Month</a>
+        </div>
+
+        <table class="table table-bordered mt-3">
             <thead>
                 <tr>
                     <th scope="col">Timestamp</th>
