@@ -1,17 +1,21 @@
-document.addEventListener("DOMContentLoaded", function() {
-    // This maps your data to the format ApexCharts expects.
-    var chartData = globalChartData.map(item => {
-        return {
-            x: new Date(item.timestamp).getTime(), // Convert timestamp to the date's millisecond representation
-            y: item.energy_consumption,
-            device_id: item.device_id
-        };
-    });
+document.addEventListener("DOMContentLoaded", () => {
+    const chartData = prepareChartData(globalChartData);
+    initializeAreaChart(chartData);
+    initializeBarChart(chartData);
+});
 
-    // Configuration for the first chart (Area Chart)
-    var options1 = {
+function prepareChartData(data) {
+    return data.map(item => ({
+        x: new Date(item.timestamp).getTime(), // Convert timestamp to millisecond representation
+        y: item.energy_consumption,
+        device_id: item.device_id
+    }));
+}
+
+function initializeAreaChart(chartData) {
+    const options = {
         chart: {
-            id: "chart2",
+            id: "areaChart",
             type: "area",
             height: 230,
             foreColor: "#ccc",
@@ -50,7 +54,7 @@ document.addEventListener("DOMContentLoaded", function() {
             strokeWidth: 3
         },
         series: [{
-            data: chartData // Use the processed chartData here
+            data: chartData
         }],
         tooltip: {
             theme: "dark",
@@ -58,33 +62,32 @@ document.addEventListener("DOMContentLoaded", function() {
                 format: "dd MMM yyyy"
             },
             y: {
-                formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
-                    return "Consumption: " + val + "<br>Device ID: " + w.config.series[seriesIndex].data[dataPointIndex].device_id;
-                }
+                formatter: (val, { seriesIndex, dataPointIndex, w }) =>
+                    `Consumption: ${val}<br>Device ID: ${w.config.series[seriesIndex].data[dataPointIndex].device_id}`
             }
         },
         xaxis: {
-            type: "datetime" // Ensuring the x-axis is treated as datetime
+            type: "datetime"
         },
         yaxis: {
             min: 0,
-            tickAmount: 4 // Customize based on your data range
+            tickAmount: 4
         }
     };
 
-    // Initialize the first chart with the specified options
-    var chart1 = new ApexCharts(document.querySelector("#chart-area"), options1);
-    chart1.render();
+    const chart = new ApexCharts(document.querySelector("#chart-area"), options);
+    chart.render();
+}
 
-    // Configuration for the second chart (Bar Chart)
-    var options2 = {
+function initializeBarChart(chartData) {
+    const options = {
         chart: {
-            id: "chart1",
+            id: "barChart",
             height: 130,
             type: "bar",
             foreColor: "#ccc",
             brush: {
-                target: "chart2",
+                target: "areaChart",
                 enabled: true
             },
             selection: {
@@ -94,7 +97,6 @@ document.addEventListener("DOMContentLoaded", function() {
                     opacity: 0.4
                 },
                 xaxis: {
-                    // Adjust these dates based on your dataset or desired window
                     min: new Date("2020-01-01").getTime(),
                     max: new Date("2020-01-31").getTime()
                 }
@@ -102,7 +104,7 @@ document.addEventListener("DOMContentLoaded", function() {
         },
         colors: ["#FF0080"],
         series: [{
-            data: chartData // Use the same chartData for consistency
+            data: chartData
         }],
         stroke: {
             width: 2
@@ -114,26 +116,22 @@ document.addEventListener("DOMContentLoaded", function() {
             size: 0
         },
         xaxis: {
-            type: "datetime", // Ensuring the x-axis is treated as datetime
+            type: "datetime",
             tooltip: {
                 theme: "dark",
                 x: {
                     format: "dd MMM yyyy"
                 },
                 y: {
-                    formatter: function (val, { series, seriesIndex, dataPointIndex, w }) {
-                        return "Consumption: " + val + "<br>Device ID: " + w.config.series[seriesIndex].data[dataPointIndex].device_id;
-                    }
-                }
+                    formatter: (val, { seriesIndex, dataPointIndex, w }) =>
+                        `Consumption: ${val}<br>Device ID: ${w.config.series[seriesIndex].data[dataPointIndex].device_id}`
             }
         },
         yaxis: {
-            tickAmount: 2 // Customize based on your data range
+            tickAmount: 2
         }
-
     };
 
-    // Initialize the second chart with the specified options
-    var chart2 = new ApexCharts(document.querySelector("#chart-bar"), options2);
-    chart2.render();
-});
+    const chart = new ApexCharts(document.querySelector("#chart-bar"), options);
+    chart.render();
+}

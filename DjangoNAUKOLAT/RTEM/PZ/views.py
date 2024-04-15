@@ -1,45 +1,41 @@
+from django.core.serializers.json import DjangoJSONEncoder
 from django.shortcuts import render
+from keras.models import load_model
 import pandas as pd
-import numpy as np
-import tensorflow as tf
 from sklearn.preprocessing import MinMaxScaler
+import json
+import os
 
+def predict(request):
+    # Load the data
+    data_path = os.path.join('PZ', 'data1.csv')
+    df = pd.read_csv(data_path)
 
-def forecast_energy(request):
-    # Assuming 'data.csv' is in the same directory as your manage.py
-    dataset_path = "PZ/data1.csv"
-    data = pd.read_csv(dataset_path)
-
-    # Preprocess your data according to the requirements of your model
-    # The preprocessing steps might include normalization, setting the sequence length, etc.
-    # For demonstration, let's assume we're scaling the 'energy_consumption' column
+    # Normalize features as your model expects for input
     scaler = MinMaxScaler(feature_range=(0, 1))
-    scaled_data = scaler.fit_transform(data[["energy_consumption"]].values)
+    df['energy_consumption'] = scaler.fit_transform(df[['energy_consumption']])
 
-    # Reshape data for LSTM model (assuming this structure based on typical usage)
-    # This is highly dependent on how your model was trained
-    sequence_length = 50
-    x_test = []
-    for i in range(sequence_length, len(scaled_data)):
-        x_test.append(scaled_data[i - sequence_length : i, 0])
-    x_test = np.array(x_test)
-    x_test = np.reshape(x_test, (x_test.shape[0], x_test.shape[1], 1))
+    # Reshape data for LSTM [samples, time steps, features]
+    X_test = df['energy_consumption'].values.reshape(-1, 1, 1)
 
-    # Load the trained model
-    model_path = "PZ/model_checkpoint.h5"
-    model = tf.keras.models.load_model(model_path)
+    # Load the Keras model
+    model_path = os.path.join('PZ', 'model_checkpoint.keras')
+    model = load_model(model_path)
 
     # Make predictions
-    predictions = model.predict(x_test)
+    predictions_scaled = model.predict(X_test)
 
-    # Inverting the MinMax scale to get actual values
-    predictions = scaler.inverse_transform(predictions)
+    # Inverse the predictions to original scale
+    predictions = scaler.inverse_transform(predictions_scaled.reshape(-1, 1)).flatten().tolist()
 
-    # Convert predictions to list for rendering in template
-    predictions_list = predictions.flatten().tolist()
+    # Preparing data for chart.js
+    # Assume you have a datetime column corresponding to each prediction.
+    # Here, I'm just creating a list of the next N hours as an example.
+    forecast_hours = pd.date_range(start=df['timestamp'].iloc[-1], periods=len(predictions), freq='h')
+    forecast_data = [{'timestamp': str(hour), 'energy_consumption': pred} for hour, pred in zip(forecast_hours, predictions)]
 
-    # Render a template with the predictions data
-    context = {
-        "predictions": predictions_list,
-    }
-    return render(request, "PZ.html", context)
+    # Convert data to JSON
+    forecast_data_json = json.dumps(list(forecast_data), cls=DjangoJSONEncoder)
+
+    # Pass the forecast data to the template
+    return render(request, 'PZ.html', {'forecast_data_json': forecast_data_json})

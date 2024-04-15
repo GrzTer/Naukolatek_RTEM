@@ -1,34 +1,31 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.png' %}">
     <title>Energy Consumption Forecast</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="{% static 'index.js' %}"></script>
+    <script src="{% static 'dropdown.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
 </head>
 <body>
-    <canvas id="forecastChart"></canvas>
-    <script>
-        var ctx = document.getElementById('forecastChart').getContext('2d');
-        var forecastedValue = {{ forecasted_value|safe }};
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Forecasted Consumption'],
-                datasets: [{
-                    label: 'Energy Consumption',
-                    data: [forecastedValue],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
+    <header class="header">
+        {% include 'navbar.html' %}
+    </header>
+    <div id="chart-area"></div> <!-- Placeholder for the chart -->
+    <div id="chart-bar"></div>   <!-- Placeholder for the second chart -->
+
+    <div>
+        {% include 'footer.html' %}
+    </div>
+    <script type="text/javascript">
+        var globalChartData = JSON.parse('{{ forecast_data_json | safe }}');
     </script>
 </body>
 </html>

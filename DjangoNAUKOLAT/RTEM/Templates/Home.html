@@ -41,16 +41,28 @@
             <div class="card">
                 <img class="card-img-top" src="path/to/feature1-image.jpg" alt="Funkcja 2">
                 <div class="card-body">
-                    <h5 class="card-title">Funkcja 1 PZ</h5>
+                    <h5 class="card-title">Funkcja 2 PZ</h5>
                     <p class="card-text">Krótki opis funkcji 2.</p>
-                    <a href="#" class="btn btn-custom">Przeglądaj</a>
+                    <a href="Concept1.html" class="btn btn-custom">Przeglądaj</a>
+                </div>
+            </div>
+        </div>
+        <!-- Additional features here -->
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img class="card-img-top" src="path/to/feature1-image.jpg" alt="Funkcja 2">
+                <div class="card-body">
+                    <h5 class="card-title">Funkcja 3 SG</h5>
+                    <p class="card-text">Krótki opis funkcji 3.</p>
+                    <a href="{% url 'energy_data_view' %}" class="btn btn-custom">Przeglądaj</a>
                 </div>
             </div>
         </div>
     </div>
+
 </div>
 
-<div >
+<div>
     {% include 'footer.html' %}
 </div>
 
