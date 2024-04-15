@@ -3,35 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {% load static %}
     <title>Energy Consumption Forecast</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Include Moment.js library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
+    <!-- Include the Moment.js adapter for Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-moment@1.0.0"></script>
+
 </head>
 <body>
+<header class="header">
+    {% include 'navbar.html' %}
+</header>
     <div class="container mt-5">
-        <h1>Energy Consumption Forecast</h1>
-
-        <div class="btn-group" role="group" aria-label="Time Range">
-            <a href="?time_range=next_day" class="btn btn-primary {% if selected_time_range == 'next_day' %}active{% endif %}">Next Day</a>
-            <a href="?time_range=next_week" class="btn btn-primary {% if selected_time_range == 'next_week' %}active{% endif %}">Next Week</a>
-            <a href="?time_range=next_month" class="btn btn-primary {% if selected_time_range == 'next_month' %}active{% endif %}">Next Month</a>
+        <h2 class="text-center mb-4">Energy Consumption Forecast</h2>
+        <div class="chart-area">
+            <canvas id="forecastChart"></canvas>
         </div>
-
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th scope="col">Timestamp</th>
-                    <th scope="col">Predicted Energy Consumption (kWh)</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for item in forecasted_data %}
-                <tr>
-                    <td>{{ item.timestamp }}</td>
-                    <td>{{ item.predicted_energy_consumption }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
     </div>
+<div >
+    {% include 'footer.html' %}
+</div>
+
+    <!-- Script to handle data and rendering -->
+    <script>
+        // This will hold the data passed from Django's view
+        var forecastData = {{ forecast_data|safe }};
+    </script>
+    <script src="{% static 'forecast-chart.js' %}"></script>
+    <script src="{% static 'dropdown.js' %}"></script>
 </body>
 </html>
