@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Energy Consumption Forecast</title>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictions</title>
+    <!-- Include Bootstrap CSS from CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-    <canvas id="forecastChart"></canvas>
-    <script>
-        var ctx = document.getElementById('forecastChart').getContext('2d');
-        var forecastedValue = {{ forecasted_value|safe }};
-        var chart = new Chart(ctx, {
-            type: 'bar',
-            data: {
-                labels: ['Forecasted Consumption'],
-                datasets: [{
-                    label: 'Energy Consumption',
-                    data: [forecastedValue],
-                    backgroundColor: 'rgba(255, 99, 132, 0.2)',
-                    borderColor: 'rgba(255, 99, 132, 1)',
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                scales: {
-                    y: {
-                        beginAtZero: true
-                    }
-                }
-            }
-        });
-    </script>
+    <div class="container mt-5">
+        <h2 class="mb-3">Prediction Results</h2>
+        {% if predictions %}
+            <ul class="list-group">
+                {% for prediction in predictions %}
+                    <li class="list-group-item">Prediction: {{ prediction }}</li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <p>No predictions to display.</p>
+        {% endif %}
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
