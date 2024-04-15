@@ -1,40 +1,29 @@
+from django.shortcuts import render
+from django.http import HttpResponse
+from keras.models import load_model
 import pandas as pd
 import numpy as np
-from django.http import JsonResponse
-from .model_loader import get_model
-from sklearn.preprocessing import MinMaxScaler
-
-# Load the model
-model = get_model()
-
-
-def preprocess(data, scaler):
-    """ Normalizes data using MinMaxScaler and reshapes it for LSTM model input. """
-    data_normalized = scaler.transform(data.reshape(-1, 1))
-    time_steps = 1  # Update this based on your model's input shape
-    sequences = np.array([data_normalized[i:(i + time_steps)] for i in range(len(data_normalized) - time_steps)])
-    return sequences.reshape((sequences.shape[0], sequences.shape[1], 1))
-
+import os
 
 def predict(request):
-    """ Endpoint for predicting energy consumption from CSV data. """
-    try:
-        # Load and preprocess data
-        df = pd.read_csv('PZ/data1.csv')
-        data = df['energy_consumption'].values
-        scaler = MinMaxScaler(feature_range=(0, 1))
-        scaler.fit(data.reshape(-1, 1))  # Fit scaler to data
+    df = pd.read_csv('PZ/data1.csv', parse_dates=['timestamp'])  # Update to match your CSV structure
 
-        processed_data = preprocess(data, scaler)
+    # Extract features from datetime
+    df['year'] = df['timestamp'].dt.year
+    df['month'] = df['timestamp'].dt.month
+    df['day'] = df['timestamp'].dt.day
+    df['hour'] = df['timestamp'].dt.hour
+    df.drop('timestamp', axis=1, inplace=True)  # Optionally drop if no longer needed
 
-        # Make prediction
-        predictions = model.predict(processed_data)
-        predictions = predictions.flatten().tolist()  # Convert predictions to a list for JSON response
+    # Load model and make predictions
+    model = load_model('PZ/model_checkpoint.keras')  # Correct path
+    predictions = model.predict(df.values)
 
-        return JsonResponse({'predictions': predictions}, safe=False)
+    # Process predictions for display
+    processed_predictions = [round(float(pred), 2) for pred in predictions.flatten()]
 
-    except FileNotFoundError:
-        return JsonResponse({'error': 'File not found'}, status=404)
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+    return render(request, 'Pz.html', {
+        'predictions': processed_predictions
+    })
 
+# Assume no form and file upload
