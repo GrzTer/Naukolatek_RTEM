@@ -1,40 +1,40 @@
 import pandas as pd
-from .model_loader import get_model
-from django.shortcuts import render
-
 import numpy as np
+from django.http import JsonResponse
+from .model_loader import get_model
 from sklearn.preprocessing import MinMaxScaler
 
+# Load the model
+model = get_model()
 
-def preprocess(data, sequence_length=720):
-    scaler = MinMaxScaler(feature_range=(0, 1))
-    data_scaled = scaler.fit_transform(data.reshape(-1, 1))  # Reshape data if it's a single series
 
-    # Create sequences
-    sequences = []
-    for i in range(len(data_scaled) - sequence_length + 1):
-        sequence = data_scaled[i:i + sequence_length]
-        sequences.append(sequence)
-
-    # Convert to numpy array and reshape to fit LSTM input (samples, time steps, features)
-    sequences = np.array(sequences)
-    return sequences, scaler
+def preprocess(data, scaler):
+    """ Normalizes data using MinMaxScaler and reshapes it for LSTM model input. """
+    data_normalized = scaler.transform(data.reshape(-1, 1))
+    time_steps = 1  # Update this based on your model's input shape
+    sequences = np.array([data_normalized[i:(i + time_steps)] for i in range(len(data_normalized) - time_steps)])
+    return sequences.reshape((sequences.shape[0], sequences.shape[1], 1))
 
 
 def predict(request):
-    model = get_model()
-    data = pd.read_csv('path/to/data1.csv')['energy_consumption']
+    """ Endpoint for predicting energy consumption from CSV data. """
+    try:
+        # Load and preprocess data
+        df = pd.read_csv('PZ/data1.csv')
+        data = df['energy_consumption'].values
+        scaler = MinMaxScaler(feature_range=(0, 1))
+        scaler.fit(data.reshape(-1, 1))  # Fit scaler to data
 
-    # Preprocess the data
-    if len(data) < 720:
-        return render(request, 'error.html',
-                      {'error': 'Not enough data for prediction. At least 720 data points required.'})
+        processed_data = preprocess(data, scaler)
 
-    processed_data, scaler = preprocess(data.values, sequence_length=720)
+        # Make prediction
+        predictions = model.predict(processed_data)
+        predictions = predictions.flatten().tolist()  # Convert predictions to a list for JSON response
 
-    # Make predictions
-    predictions = model.predict(processed_data)
-    predictions = [float(pred) for pred in predictions.flatten()]
+        return JsonResponse({'predictions': predictions}, safe=False)
 
-    return render(request, 'PZ.html', {'predictions': predictions})
+    except FileNotFoundError:
+        return JsonResponse({'error': 'File not found'}, status=404)
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)
 
