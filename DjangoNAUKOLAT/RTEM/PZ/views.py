@@ -9,20 +9,26 @@ def predict(request):
     # Load data
     df = pd.read_csv('PZ/data1.csv', parse_dates=['timestamp'])
 
-    # Preprocess timestamp if needed and select the energy_consumption
-    # This assumes the model might need some datetime components like hour of the day
-    df['hour'] = df['timestamp'].dt.hour  # Example: Use hour if the model needs it
-    features = df[['energy_consumption', 'hour']]  # Adjust this based on your model's trained features
+    # Preprocess data if needed (example: normalize, reshape, etc.)
+    df['energy_consumption_normalized'] = (df['energy_consumption'] - df['energy_consumption'].mean()) / df[
+        'energy_consumption'].std()
+
+    # Reshape data if your model expects a different shape (like 3D for LSTM)
+    features = df[['energy_consumption_normalized']].values
+    features = np.reshape(features, (features.shape[0], features.shape[1], 1))
 
     # Load your model
-    model = load_model('PZ/model_checkpoint.keras')  # Ensure the model path is correct
+    model_path = os.path.join('PZ/model_checkpoint.keras')  # Make sure 'PZ' is the correct directory
+    model = load_model(model_path)
 
     # Make predictions
     predictions = model.predict(features)
 
-    # Formatting the predictions to return to the template
-    predictions = [float(pred) for pred in predictions.flatten()]
+    # Convert predictions to a list of dictionaries with the desired structure
+    forecasted_data = [{'timestamp': ts, 'predicted_energy_consumption': float(pred)}
+                       for ts, pred in zip(df['timestamp'], predictions.flatten())]
 
-    # Rendering the predictions in a template
-    return render(request, 'Pz.html', {'predictions': predictions})
-
+    # Render the predictions in a template
+    return render(request, 'PZ.html', {
+        'forecasted_data': forecasted_data
+    })
