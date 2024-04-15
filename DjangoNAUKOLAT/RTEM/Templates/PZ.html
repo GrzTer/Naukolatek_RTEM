@@ -1,25 +1,37 @@
-<!-- myapp/templates/myapp/Pz.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Prediction Results</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            text-align: center;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #333;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #555;
+        }
+    </style>
 </head>
 <body>
-    <h1>Upload your CSV file</h1>
-    <form action="" method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ processed_predictions }}
-        <button type="submit">Upload and Predict</button>
-    </form>
-
-    {% if predictions %}
-        <h2>Predictions:</h2>
-        <ul>
-            {% for prediction in predictions %}
-                <li>{{ prediction }}</li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+    <div class="container">
+        <h1>Energy Consumption Forecast</h1>
+        <div class="result">
+            {% if predictions %}
+                Forecasted Energy Consumption: {{ predictions }} kWh
+            {% else %}
+                No data available to show predictions.
+            {% endif %}
+        </div>
+    </div>
 </body>
 </html>

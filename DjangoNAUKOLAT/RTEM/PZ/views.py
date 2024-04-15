@@ -1,29 +1,28 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from keras.models import load_model
 import pandas as pd
 import numpy as np
 import os
 
+
 def predict(request):
-    df = pd.read_csv('PZ/data1.csv', parse_dates=['timestamp'])  # Update to match your CSV structure
+    # Load data
+    df = pd.read_csv('PZ/data1.csv', parse_dates=['timestamp'])
 
-    # Extract features from datetime
-    df['year'] = df['timestamp'].dt.year
-    df['month'] = df['timestamp'].dt.month
-    df['day'] = df['timestamp'].dt.day
-    df['hour'] = df['timestamp'].dt.hour
-    df.drop('timestamp', axis=1, inplace=True)  # Optionally drop if no longer needed
+    # Preprocess timestamp if needed and select the energy_consumption
+    # This assumes the model might need some datetime components like hour of the day
+    df['hour'] = df['timestamp'].dt.hour  # Example: Use hour if the model needs it
+    features = df[['energy_consumption', 'hour']]  # Adjust this based on your model's trained features
 
-    # Load model and make predictions
-    model = load_model('PZ/model_checkpoint.keras')  # Correct path
-    predictions = model.predict(df.values)
+    # Load your model
+    model = load_model('PZ/model_checkpoint.keras')  # Ensure the model path is correct
 
-    # Process predictions for display
-    processed_predictions = [round(float(pred), 2) for pred in predictions.flatten()]
+    # Make predictions
+    predictions = model.predict(features)
 
-    return render(request, 'Pz.html', {
-        'predictions': processed_predictions
-    })
+    # Formatting the predictions to return to the template
+    predictions = [float(pred) for pred in predictions.flatten()]
 
-# Assume no form and file upload
+    # Rendering the predictions in a template
+    return render(request, 'Pz.html', {'predictions': predictions})
+
