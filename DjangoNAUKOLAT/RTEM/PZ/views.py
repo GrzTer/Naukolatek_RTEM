@@ -1,3 +1,4 @@
+import numpy as np
 from django.shortcuts import render
 from keras.models import load_model
 import pandas as pd
