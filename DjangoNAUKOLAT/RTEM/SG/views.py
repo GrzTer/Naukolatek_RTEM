@@ -1,65 +1,10 @@
 from django.shortcuts import render
-from entsoe import EntsoePandasClient
 import pandas as pd
+import os
+from django.conf import settings
 import json
-from entsoe.exceptions import NoMatchingDataError
 
 def energy_data_view(request):
-    api_key = "d9f78120-2bb1-4182-b3d2-a88195b24ad5"
-    client = EntsoePandasClient(api_key=api_key)
-    country_currency_map = {
-        'AL': 'ALL',  # Albania
-        'AD': 'EUR',  # Andora
-        'AM': 'AMD',  # Armenia
-        'AT': 'EUR',  # Austria
-        'AZ': 'AZN',  # Azerbejdżan
-        'BY': 'BYN',  # Białoruś
-        'BE': 'EUR',  # Belgia
-        'BA': 'BAM',  # Bośnia i Hercegowina
-        'BG': 'BGN',  # Bułgaria
-        'HR': 'HRK',  # Chorwacja
-        'CY': 'EUR',  # Cypr
-        'CZ': 'CZK',  # Czechy
-        'DK': 'DKK',  # Dania
-        'EE': 'EUR',  # Estonia
-        'FI': 'EUR',  # Finlandia
-        'FR': 'EUR',  # Francja
-        'GE': 'GEL',  # Gruzja
-        'DE': 'EUR',  # Niemcy
-        'GR': 'EUR',  # Grecja
-        'HU': 'HUF',  # Węgry
-        'IS': 'ISK',  # Islandia
-        'IE': 'EUR',  # Irlandia
-        'IT': 'EUR',  # Włochy
-        'KZ': 'KZT',  # Kazachstan
-        'XK': 'EUR',  # Kosowo
-        'LV': 'EUR',  # Łotwa
-        'LI': 'CHF',  # Liechtenstein
-        'LT': 'EUR',  # Litwa
-        'LU': 'EUR',  # Luksemburg
-        'MT': 'EUR',  # Malta
-        'MD': 'MDL',  # Mołdawia
-        'MC': 'EUR',  # Monako
-        'ME': 'EUR',  # Czarnogóra
-        'NL': 'EUR',  # Holandia
-        'MK': 'MKD',  # Macedonia Północna
-        'NO': 'NOK',  # Norwegia
-        'PL': 'PLN',  # Polska
-        'PT': 'EUR',  # Portugalia
-        'RO': 'RON',  # Rumunia
-        'RU': 'RUB',  # Rosja
-        'SM': 'EUR',  # San Marino
-        'RS': 'RSD',  # Serbia
-        'SK': 'EUR',  # Słowacja
-        'SI': 'EUR',  # Słowenia
-        'ES': 'EUR',  # Hiszpania
-        'SE': 'SEK',  # Szwecja
-        'CH': 'CHF',  # Szwajcaria
-        'TR': 'TRY',  # Turcja
-        'UA': 'UAH',  # Ukraina
-        'GB': 'GBP',  # Wielka Brytania
-        'VA': 'EUR',  # Watykan
-    }
     context = {
         'currency': 'EUR',
         'dates': json.dumps([]),
@@ -68,22 +13,49 @@ def energy_data_view(request):
     }
 
     if request.method == "POST":
-        country_code = request.POST.get("country_code", "PL").upper()
-        currency = country_currency_map.get(country_code, 'EUR')
-        context['currency'] = currency
-        start_date = pd.Timestamp(request.POST.get("start_date", "2024-03-01"), tz="Europe/Warsaw")
-        end_date = pd.Timestamp(request.POST.get("end_date", "2024-04-01"), tz="Europe/Warsaw")
+        data_path = os.path.join(settings.BASE_DIR, 'data', 'energy_prices.csv')
+        if not os.path.exists(data_path):
+            context['error'] = "Data file does not exist. Please ensure data fetching is set up correctly."
+            return render(request, "SG.html", context)
 
-        try:
-            prices = client.query_day_ahead_prices(country_code, start=start_date, end=end_date)
-            prices_data = [{'date': str(index.strftime('%Y-%m-%d')), 'price': value} for index, value in prices.items()]
-            context['dates'] = json.dumps([item['date'] for item in prices_data])
-            context['prices_chart'] = json.dumps(prices_data)
-        except NoMatchingDataError:
-            context['error'] = "No matching data available for the selected range."
-        except Exception as e:
-            context['error'] = f"An error occurred: {str(e)}"
+        # Read the whole dataset from CSV
+        df = pd.read_csv(data_path)
+        df['date'] = pd.to_datetime(df['date'])
 
-        return render(request, "SG.html", context)
+        # Read user input for time span
+        time_span = request.POST.get('time_span', 'year')
+
+        if time_span == 'year':
+            start_date = pd.Timestamp.now(tz="Europe/Warsaw") - pd.DateOffset(years=1)
+        elif time_span == 'quarter':
+            quarter = int(request.POST.get('quarter', 1))
+            current_year = pd.Timestamp.now().year
+            start_month = (quarter - 1) * 3 + 1
+            start_date = pd.Timestamp(year=current_year, month=start_month, day=1)
+            end_date = start_date + pd.DateOffset(months=3)
+        elif time_span == 'month':
+            month = int(request.POST.get('month', 1))
+            current_year = pd.Timestamp.now().year
+            start_date = pd.Timestamp(year=current_year, month=month, day=1)
+            end_date = start_date + pd.DateOffset(months=1)
+        elif time_span == 'week':
+            week = int(request.POST.get('week', 1))
+            year_start = pd.Timestamp(year=pd.Timestamp.now().year, month=1, day=1)
+            start_date = year_start + pd.DateOffset(weeks=week - 1)
+            end_date = start_date + pd.DateOffset(weeks=1)
+        else:
+            start_date = pd.Timestamp.now(tz="Europe/Warsaw") - pd.DateOffset(years=1)
+
+        filtered_data = df[df['date'] >= start_date]
+        if 'end_date' in locals():
+            filtered_data = filtered_data[filtered_data['date'] < end_date]
+
+        prices_data = [{
+            'date': date.strftime('%Y-%m-%d'),
+            'price': price
+        } for date, price in zip(filtered_data['date'], filtered_data['price'])]
+
+        context['dates'] = json.dumps([d['date'] for d in prices_data])
+        context['prices_chart'] = json.dumps(prices_data)
 
     return render(request, "SG.html", context)

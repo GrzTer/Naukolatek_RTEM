@@ -6,7 +6,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 function prepareChartData(data) {
     return data.map(item => ({
-        x: new Date(item.timestamp).getTime(), // Convert timestamp to millisecond representation
+        x: new Date(item.timestamp).getTime(),
         y: item.energy_consumption,
         device_id: item.device_id
     }));
