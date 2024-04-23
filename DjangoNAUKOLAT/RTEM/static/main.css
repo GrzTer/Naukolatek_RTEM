@@ -24,3 +24,17 @@ body { display: flex; flex-direction: column;}
 }
 
 
+/*.kpi-container {*/
+/*    text-align: center;*/
+/*    margin: 20px 0;*/
+/*}*/
+
+/*.kpi-value {*/
+/*    font-size: 48px;*/
+/*    font-weight: bold;*/
+/*}*/
+
+/*.kpi-description {*/
+/*    font-size: 24px;*/
+/*    color: #555;*/
+/*}*/

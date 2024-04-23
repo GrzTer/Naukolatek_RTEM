@@ -60,30 +60,30 @@ def energy_data_view(request):
         'GB': 'GBP',  # Wielka Brytania
         'VA': 'EUR',  # Watykan
     }
+    context = {
+        'currency': 'EUR',
+        'dates': json.dumps([]),
+        'prices_chart': json.dumps([]),
+        'error': None
+    }
 
-    # Domyślna waluta
-    default_currency = 'EUR'
-    context = {'currency': default_currency}
     if request.method == "POST":
         country_code = request.POST.get("country_code", "PL").upper()
-        currency = country_currency_map.get(country_code, default_currency)  # Domyślnie 'EUR'
+        currency = country_currency_map.get(country_code, 'EUR')
+        context['currency'] = currency
         start_date = pd.Timestamp(request.POST.get("start_date", "2024-03-01"), tz="Europe/Warsaw")
         end_date = pd.Timestamp(request.POST.get("end_date", "2024-04-01"), tz="Europe/Warsaw")
 
         try:
             prices = client.query_day_ahead_prices(country_code, start=start_date, end=end_date)
             prices_data = [{'date': str(index.strftime('%Y-%m-%d')), 'price': value} for index, value in prices.items()]
-            dates = [date.strftime('%Y-%m-%d') for date in prices.index]
-            prices_chart = json.dumps(prices_data)
-            dates_json = json.dumps(dates)
-            context = {'prices_chart': prices_chart, 'dates': dates_json,  'currency': currency}
+            context['dates'] = json.dumps([item['date'] for item in prices_data])
+            context['prices_chart'] = json.dumps(prices_data)
         except NoMatchingDataError:
-            context = {"error": "No matching data available for the selected range."}
-            return render(request, "SG.html", context)
+            context['error'] = "No matching data available for the selected range."
         except Exception as e:
-            context = {"error": f"An error occurred: {str(e)}"}
-            return render(request, "SG.html", context)
+            context['error'] = f"An error occurred: {str(e)}"
 
         return render(request, "SG.html", context)
 
-    return render(request, "SG.html")
+    return render(request, "SG.html", context)
