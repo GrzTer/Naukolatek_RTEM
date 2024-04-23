@@ -38,7 +38,7 @@ Możliwość dodania w przyszłości czat bota, który by odpowiadał roli asyst
 # Przydatne komendy
 ### Django
 - Aktywacja środowiska: ```env\Scripts\activate``` / Windows
-- Aktywacja środowiska: ```source env\Scripts\activate``` / Linux
+- Aktywacja środowiska: ```source env/Scripts/activate``` / Linux
 - Dezaktywacja środowiska: ```deactivate``` / Windows
 - [CheatSheet](https://docs.google.com/document/d/1z2Mm_dkT3-zRV_uZ3sOxd9jDH--bTU4HZxVyXrb-sHo/edit?pli=1)
 - ```pip install -r requirements.txt```
