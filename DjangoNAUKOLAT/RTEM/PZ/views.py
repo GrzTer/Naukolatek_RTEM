@@ -29,8 +29,6 @@ def predict(request):
     predictions = scaler.inverse_transform(predictions_scaled.reshape(-1, 1)).flatten().tolist()
 
     # Preparing data for chart.js
-    # Assume you have a datetime column corresponding to each prediction.
-    # Here, I'm just creating a list of the next N hours as an example.
     forecast_hours = pd.date_range(start=df['timestamp'].iloc[-1], periods=len(predictions), freq='h')
     forecast_data = [{'timestamp': str(hour), 'energy_consumption': pred} for hour, pred in zip(forecast_hours, predictions)]
 

@@ -2,7 +2,7 @@ html, body { height: 100%; margin: 0; font-family: 'Arial', sans-serif; }
 body { display: flex; flex-direction: column;}
 .sticky-navbar { position: sticky; top: 0; z-index: 1080;  }
 .active-nav-link { color: #007bff; font-weight: bold; }
-.hero-background { background: url('path/to/dynamic-background.jpg') no-repeat center center; background-size: cover; }
+/*.hero-background { background: url('path/to/dynamic-background.jpg') no-repeat center center; background-size: cover; }*/
 .btn-primary { background-color: #007bff; border-color: #007bff; }
 .btn-primary:hover { background-color: #0056b3; border-color: #004085; }
 .card:hover { transform: scale(1.05); }
