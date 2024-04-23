@@ -125,13 +125,13 @@ function initializeBarChart(chartData) {
                 y: {
                     formatter: (val, { seriesIndex, dataPointIndex, w }) =>
                         `Consumption: ${val}<br>Device ID: ${w.config.series[seriesIndex].data[dataPointIndex].device_id}`
-            }
+                }
+            },
+            yaxis: {
+                tickAmount: 2
+            },
         },
-        yaxis: {
-            tickAmount: 2
-        }
     };
-
     const chart = new ApexCharts(document.querySelector("#chart-bar"), options);
     chart.render();
 }
