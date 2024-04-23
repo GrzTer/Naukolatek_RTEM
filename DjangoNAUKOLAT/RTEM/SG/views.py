@@ -4,7 +4,7 @@ import pandas as pd
 
 
 def energy_data_view(request):
-    api_key = "YOUR_ENTSOE_API_KEY"
+    api_key = "d9f78120-2bb1-4182-b3d2-a88195b24ad5"
     client = EntsoePandasClient(api_key=api_key)
 
     if request.method == "POST":
