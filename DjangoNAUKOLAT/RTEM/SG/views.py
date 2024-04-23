@@ -7,9 +7,66 @@ from entsoe.exceptions import NoMatchingDataError
 def energy_data_view(request):
     api_key = "d9f78120-2bb1-4182-b3d2-a88195b24ad5"
     client = EntsoePandasClient(api_key=api_key)
+    country_currency_map = {
+        'AL': 'ALL',  # Albania
+        'AD': 'EUR',  # Andora
+        'AM': 'AMD',  # Armenia
+        'AT': 'EUR',  # Austria
+        'AZ': 'AZN',  # Azerbejdżan
+        'BY': 'BYN',  # Białoruś
+        'BE': 'EUR',  # Belgia
+        'BA': 'BAM',  # Bośnia i Hercegowina
+        'BG': 'BGN',  # Bułgaria
+        'HR': 'HRK',  # Chorwacja
+        'CY': 'EUR',  # Cypr
+        'CZ': 'CZK',  # Czechy
+        'DK': 'DKK',  # Dania
+        'EE': 'EUR',  # Estonia
+        'FI': 'EUR',  # Finlandia
+        'FR': 'EUR',  # Francja
+        'GE': 'GEL',  # Gruzja
+        'DE': 'EUR',  # Niemcy
+        'GR': 'EUR',  # Grecja
+        'HU': 'HUF',  # Węgry
+        'IS': 'ISK',  # Islandia
+        'IE': 'EUR',  # Irlandia
+        'IT': 'EUR',  # Włochy
+        'KZ': 'KZT',  # Kazachstan
+        'XK': 'EUR',  # Kosowo
+        'LV': 'EUR',  # Łotwa
+        'LI': 'CHF',  # Liechtenstein
+        'LT': 'EUR',  # Litwa
+        'LU': 'EUR',  # Luksemburg
+        'MT': 'EUR',  # Malta
+        'MD': 'MDL',  # Mołdawia
+        'MC': 'EUR',  # Monako
+        'ME': 'EUR',  # Czarnogóra
+        'NL': 'EUR',  # Holandia
+        'MK': 'MKD',  # Macedonia Północna
+        'NO': 'NOK',  # Norwegia
+        'PL': 'PLN',  # Polska
+        'PT': 'EUR',  # Portugalia
+        'RO': 'RON',  # Rumunia
+        'RU': 'RUB',  # Rosja
+        'SM': 'EUR',  # San Marino
+        'RS': 'RSD',  # Serbia
+        'SK': 'EUR',  # Słowacja
+        'SI': 'EUR',  # Słowenia
+        'ES': 'EUR',  # Hiszpania
+        'SE': 'SEK',  # Szwecja
+        'CH': 'CHF',  # Szwajcaria
+        'TR': 'TRY',  # Turcja
+        'UA': 'UAH',  # Ukraina
+        'GB': 'GBP',  # Wielka Brytania
+        'VA': 'EUR',  # Watykan
+    }
 
+    # Domyślna waluta
+    default_currency = 'EUR'
+    context = {'currency': default_currency}
     if request.method == "POST":
-        country_code = request.POST.get("country_code", "PL")
+        country_code = request.POST.get("country_code", "PL").upper()
+        currency = country_currency_map.get(country_code, default_currency)  # Domyślnie 'EUR'
         start_date = pd.Timestamp(request.POST.get("start_date", "2024-03-01"), tz="Europe/Warsaw")
         end_date = pd.Timestamp(request.POST.get("end_date", "2024-04-01"), tz="Europe/Warsaw")
 
@@ -19,7 +76,7 @@ def energy_data_view(request):
             dates = [date.strftime('%Y-%m-%d') for date in prices.index]
             prices_chart = json.dumps(prices_data)
             dates_json = json.dumps(dates)
-            context = {'prices_chart': prices_chart, 'dates': dates_json}
+            context = {'prices_chart': prices_chart, 'dates': dates_json,  'currency': currency}
         except NoMatchingDataError:
             context = {"error": "No matching data available for the selected range."}
             return render(request, "SG.html", context)

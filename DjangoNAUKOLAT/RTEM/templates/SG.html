@@ -52,47 +52,83 @@
     </div>
 
 
-    <script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Pobranie waluty z kontekstu Django
+        const currency = '{{ currency }}';
+        const dates = JSON.parse('{{ dates|safe }}' || '[]');
+        const pricesData = JSON.parse('{{ prices_chart|safe }}' || '[]').map(data => ({ x: data.date, y: data.price }));
 
-        document.addEventListener('DOMContentLoaded', function () {
-            const dates = JSON.parse('{{ dates|safe }}' || '[]');
-            const pricesData = JSON.parse('{{ prices_chart|safe }}' || '[]').map(data => ({ x: data.date, y: data.price }));
-            const ctx = document.getElementById('energyChart').getContext('2d');
-            const energyChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [{
-                        label: 'Energy Prices',
-                        data: pricesData,
-                        borderColor: 'rgb(75, 192, 192)',
-                        tension: 0.1
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                parser: 'YYYY-MM-DD',
-                                tooltipFormat: 'll'
-                            },
-                            title: {
-                                display: true,
-                                text: 'Date'
-                            }
+        const ctx = document.getElementById('energyChart').getContext('2d');
+        const energyChart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: `Energy Prices in ${currency}`,
+                    data: pricesData,
+                    borderColor: '#007bff',
+                    backgroundColor: 'rgba(0, 123, 255, 0.5)',
+                    borderWidth: 3,
+                    pointRadius: 5,
+                    pointBackgroundColor: 'white',
+                    pointBorderColor: '#007bff',
+                    fill: false,
+                    tension: 0.1
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                scales: {
+                    x: {
+                        type: 'time',
+                        time: {
+                            parser: 'YYYY-MM-DD',
+                            tooltipFormat: 'll'
                         },
-                        y: {
-                            title: {
-                                display: true,
-                                text: 'Price (EUR/MWh)'
-                            }
+                        title: {
+                            display: true,
+                            text: 'Date'
+                        },
+                        ticks: {
+                            fontSize: 12
+                        },
+                        gridLines: {
+                            display: true
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: `Price (${currency})`
+                        },
+                        ticks: {
+                            fontSize: 12
+                        },
+                        gridLines: {
+                            display: true
                         }
                     }
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: false
+                },
+                hover: {
+                    mode: 'nearest',
+                    intersect: true
+                },
+                elements: {
+                    line: {
+                        tension: 0 // disables bezier curves
+                    }
                 }
-            });
+            }
         });
-    </script>
+    });
+</script>
+
+
 
 {#    <div>#}
 {#        {% include 'Footer.html' %}#}
