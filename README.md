@@ -28,8 +28,12 @@
 - (OZ)Optymalizacja Zużycia: Nasza aplikacja będzie automatycznie proponować sposoby optymalizacji zużycia energii, uwzględniając m.in. zmiany czasu pracy urządzeń i wykorzystanie źródeł odnawialnych. 
 - (PA)Powiadomienia i Alarmy: Aplikacja generuje powiadomienia w czasie rzeczywistym w przypadku awarii urządzeń lub nieprawidłowych wzorców zużycia energii. 
 - (SG)Integracja z Smart Grid: Projekt zostanie zintegrowany z inteligentnymi sieciami energetycznymi, co umożliwi dostęp do danych dotyczących cen energii w czasie rzeczywistym.
+---
 
-Możliwość dodania w przyszłości czat bota, który by odpowiadał roli asystęta pracującego w celu zwiększenia użyteczności i sprawności użytkowania z aplikacji (znany tręd w tych czasach, a przy okolicznościach gdzie co nowy model AI pojawia się co raz, jest to z pewnością realny dodatek)
+### Możliwość dodania w przyszłości czat bota, który by odpowiadał roli asystęta pracującego w celu zwiększenia użyteczności i sprawności użytkowania z aplikacji (znany tręd w tych czasach, a przy okolicznościach gdzie co nowy model AI pojawia się co raz, jest to z pewnością realny dodatek)
+
+MOże zostawić po angielsku?
+
 ---
 # Przydatne linki
 - [FIGMA RTEM FLOW](https://www.figma.com/file/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?type=whiteboard&node-id=0%3A1&t=FW0Yp6fZ3LtkCLzH-1)
