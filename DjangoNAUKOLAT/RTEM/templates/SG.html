@@ -19,20 +19,17 @@
         <h2>Select Time Span</h2>
         <div class="btn-group" role="group" aria-label="Time Span Selection">
             <button type="button" class="btn btn-primary" onclick="updateTimeSpan('year')">Year</button>
-            <button type="button" class="btn btn-primary" onclick="updateTimeSpan('quarter')">Quarter</button>
             <button type="button" class="btn btn-primary" onclick="updateTimeSpan('month')">Month</button>
             <button type="button" class="btn btn-primary" onclick="updateTimeSpan('week')">Week</button>
         </div>
 
-        <!-- Dynamic form inputs will be injected here -->
         <div id="additionalInputs" class="my-3"></div>
 
-        <!-- Existing form to submit requests -->
-        <form method="post" class="mb-3" id="dataForm">
+        <form id="dataForm" class="mb-3">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="country_code" class="form-label">Country Code:</label>
-                <input type="text" class="form-control" name="country_code" id="country_code" required>
+                <input type="text" class="form-control" id="country_code" name="country_code" required>
             </div>
             <button type="submit" class="btn btn-success">Get Data</button>
         </form>
@@ -41,131 +38,102 @@
         <div id="energyChart"></div>
     </div>
 
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-    const chartData = JSON.parse('{{ prices_chart|safe }}' || '[]').map(item => ({
-        x: new Date(item.date),
-        y: item.price,
-    }));
-    initializeBarChart(chartData, '{{ currency }}');
-});
+    <script>
+        document.getElementById('dataForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const country = document.getElementById('country_code').value;
+            const timeSpan = document.querySelector('select[name="time_span"]') ? document.querySelector('select[name="time_span"]').value : null;
+            fetchChartData(country, timeSpan);
+        });
 
-function updateTimeSpan(span) {
-    const additionalInputs = document.getElementById('additionalInputs');
-    let inputHtml = '';
-    if (span === 'quarter') {
-        inputHtml = `<label for="quarterSelect">Select Quarter:</label>
-                     <select class="form-control" id="quarterSelect" name="quarter">
-                         <option value="1">Q1</option>
-                         <option value="2">Q2</option>
-                         <option value="3">Q3</option>
-                         <option value="4">Q4</option>
-                     </select>`;
-    } else if (span === 'month') {
-        inputHtml = `<label for="monthSelect">Select Month:</label>
-                     <select class="form-control" id="monthSelect" name="month">
-                         <option value="1">January</option>
-                         <option value="2">February</option>
-                     </select>`;
-    } else if (span === 'week') {
-        inputHtml = `<label for="weekSelect">Select Week:</label>
-                     <input type="week" class="form-control" id="weekSelect" name="week">`;
-    }
-    additionalInputs.innerHTML = inputHtml;
-}
-
-document.getElementById('dataForm').addEventListener('submit', function(e) {
-    e.preventDefault();
-    const formData = new FormData(this);
-    fetch('energy_prices.csv', {
-        method: 'POST',
-        body: formData
-    }).then(response => response.json())
-    .then(data => {
-        const updatedChartData = data.map(item => ({
-            x: new Date(item.date),
-            y: item.price,
-        }));
-        updateBarChart(updatedChartData);
-    }).catch(error => console.error('Error fetching data:', error));
-});
-
-let chart;
-function initializeBarChart(chartData, currency) {
-    const options = {
-        chart: {
-            type: 'bar',
-            height: 350,
-            events: {
-                click: function(chart, w, e) {
-                }
+        function updateTimeSpan(span) {
+            const additionalInputs = document.getElementById('additionalInputs');
+            let inputHtml = `<label for="time_span" class="form-label">Select ${span.charAt(0).toUpperCase() + span.slice(1)}:</label>`;
+            if (span === 'year') {
+                inputHtml += `<input type="number" class="form-control" id="yearInput" name="year" required>`;
+            } else if (span === 'month') {
+                inputHtml += `<input type="month" class="form-control" id="monthInput" name="month" required>`;
+            } else if (span === 'week') {
+                inputHtml += `<input type="week" class="form-control" id="weekInput" name="week" required>`;
             }
-        },
-        series: [{
-            name: `Price in ${currency}`,
-            data: chartData
-        }],
-        xaxis: {
-            type: 'datetime',
-            labels: {
-                datetimeUTC: false,
-                datetimeFormatter: {
-                    year: 'yyyy',
-                    month: 'MMM \'yy',
-                    day: 'dd MMM',
-                    hour: 'HH:mm'
-                }
-            }
-        },
-        tooltip: {
-            x: {
-                format: 'dd MMM yyyy'
-            },
-            y: {
-                formatter: function (val) {
-                    return `${val} ${currency}`
-                }
-            }
-        },
-        plotOptions: {
-            bar: {
-                horizontal: false,
-                columnWidth: '55%',
-                endingShape: 'rounded'
-            },
-        },
-        dataLabels: {
-            enabled: false
-        },
-        stroke: {
-            show: true,
-            width: 2,
-            colors: ['transparent']
-        },
-        yaxis: {
-            title: {
-                text: `Price (${currency})`
-            },
-        },
-        fill: {
-            opacity: 1
+            additionalInputs.innerHTML = inputHtml;
         }
-    };
 
-    chart = new ApexCharts(document.querySelector("#energyChart"), options);
-    chart.render();
-}
+        function fetchChartData(country, timeSpan) {
+            const formData = new FormData();
+            formData.append('country_code', country);
+            formData.append('time_span', timeSpan);
+            if (timeSpan === 'year') {
+                formData.append('year', document.getElementById('yearInput').value);
+            } else if (timeSpan === 'month') {
+                formData.append('month', document.getElementById('monthInput').value.split('-')[1]); // Extracting month from YYYY-MM
+            } else if (timeSpan === 'week') {
+                formData.append('week', document.getElementById('weekInput').value);
+            }
 
-function updateBarChart(chartData) {
-    chart.updateSeries([{
-        data: chartData
-    }]);
-}
-</script>
+            fetch('/fetch_data/', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json())
+            .then(data => {
+                updateChart(data);
+            }).catch(error => {
+                console.error('Error fetching data:', error);
+                alert('Error fetching data. Please check your network connection.');
+            });
+        }
 
+        function updateChart(chartData) {
+            if (!chart) {
+                initializeBarChart(chartData, 'PLN'); // Assume currency is PLN
+            } else {
+                chart.updateSeries([{
+                    data: chartData.map(item => ({
+                        x: new Date(item.x),
+                        y: item.y
+                    }))
+                }]);
+            }
+        }
 
-    <div>
+        let chart;
+        function initializeBarChart(chartData, currency) {
+            const options = {
+                chart: {
+                    type: 'line',
+                    height: 350
+                },
+                series: [{
+                    name: `Price in ${currency}`,
+                    data: chartData
+                }],
+                xaxis: {
+                    type: 'datetime'
+                },
+                yaxis: {
+                    title: {
+                        text: `Price (${currency})`
+                    }
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd MMM yyyy HH:mm'
+                    },
+                    y: {
+                        formatter: function(val) {
+                            return `${val} ${currency}`;
+                        }
+                    }
+                }
+            };
+
+            chart = new ApexCharts(document.querySelector("#energyChart"), options);
+            chart.render();
+        }
+    </script>
+
+    <footer>
         {% include 'Footer.html' %}
-    </div>
+    </footer>
 </body>
 </html>
