@@ -24,15 +24,31 @@ body { display: flex; flex-direction: column;}
 }
 
 
-.chart-container {
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+#chart {
+    max-width: 650px;
+    margin: 35px auto;
+}
+@media (max-width: 768px) {
+    #chart {
+        max-width: 100%;
+    }
+}
+
+#chart-container {
     margin: 20px;
 }
 
-#chart {
-    max-width: 650px;
-    margin: auto;
+#theme-selector {
+    position: fixed;
+    right: 20px;
+    top: 20px;
+}
+
+body[data-theme="dark"] {
+    background-color: #333;
+    color: #ccc;
+}
+
+body[data-theme="dark"] #chart-container {
+    border-color: #777;
 }
