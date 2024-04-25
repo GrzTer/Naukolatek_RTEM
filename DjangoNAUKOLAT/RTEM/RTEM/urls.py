@@ -20,7 +20,7 @@ from django.urls import path
 from Home.views import home_view, about_view
 from MZE.views import chart_view
 from PZ.views import predict
-from SG.views import fetch_chart_data, index, get_data
+from SG.views import EnergyPricesView, show_chart
 
 urlpatterns = [
     path("admin/", admin.site.urls),
@@ -29,6 +29,6 @@ urlpatterns = [
     path("about/", about_view, name="about_view"),
     path("PZ/", predict, name="forecast_energy"),
     # path("SG/", energy_data_view, name="energy_data_view"),
-    path('SG', index, name='energy_data_view'),  # For loading the main HTML page
-    path('fetch_data/', get_data, name='fetch_data'),
+    path('fetch_data/', EnergyPricesView.as_view(), name='fetch_data'),
+    path('SG/', show_chart, name='show_chart'),
 ]

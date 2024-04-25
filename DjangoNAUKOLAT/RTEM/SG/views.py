@@ -1,54 +1,51 @@
 import pandas as pd
-import logging
+from django.http import JsonResponse
+from django.views import View
+from django.core.paginator import Paginator
+from django.core.cache import cache
 from django.shortcuts import render
-from django.http import JsonResponse, HttpResponseBadRequest
-from django.views.decorators.http import require_http_methods
 
-# Set up logging
-logger = logging.getLogger(__name__)
+class EnergyPricesView(View):
+    def post(self, request):
+        # Utwórz klucz cache'u na podstawie parametrów żądania
+        cache_key = f"energy_prices_{request.POST.get('year', '')}_{request.POST.get('quarter', '')}_{request.POST.get('month', '')}_{request.POST.get('week', '')}_{request.POST.get('country_code', '')}"
+        cached_data = cache.get(cache_key)
+        if cached_data:
+            return JsonResponse(cached_data)
 
-# Function to serve the main HTML page
-@require_http_methods(["GET"])
-def index(request):
-    return render(request, 'SG.html')
+        df = pd.read_csv('SG/energy_prices.csv')
+        df['date'] = pd.to_datetime(df['date'], utc=True)  # Dodano 'utc=True' do uniknięcia ostrzeżenia
 
-# Function to fetch and process chart data from the CSV
-def fetch_chart_data(request):
-    try:
-        # Read the CSV file
-        data = pd.read_csv('energy_prices.csv')
-        data['Date'] = pd.to_datetime(data['Date'])
+        # Pobranie parametrów z formularza
+        year = request.POST.get('year')
+        quarter = request.POST.get('quarter')
+        month = request.POST.get('month')
+        week = request.POST.get('week')
+        country_code = request.POST.get('country_code', '').upper()
 
-        # Retrieve filtering parameters from the request
-        time_span = request.POST.get('time_span', 'month')
-        start_date = request.POST.get('start_date', data['Date'].min().strftime('%Y-%m-%d'))
-        end_date = request.POST.get('end_date', data['Date'].max().strftime('%Y-%m-%d'))
+        if year:
+            df = df[df['date'].dt.year == int(year)]
+        if quarter:
+            df = df[df['date'].dt.quarter == int(quarter)]
+        if month:
+            df = df[df['date'].dt.month == int(month)]
+        if week:
+            df = df[df['date'].dt.isocalendar().week == int(week)]
 
-        # Filter data within the selected date range
-        data = data[(data['Date'] >= start_date) & (data['Date'] <= end_date)]
+        df.sort_values(by='date', inplace=True)
 
-        # Additional filtering based on 'time_span'
-        if time_span == 'month':
-            month = int(request.POST.get('month'))
-            data = data[data['Date'].dt.month == month]
-        elif time_span == 'week':
-            week = int(request.POST.get('week'))
-            data = data[data['Date'].dt.week == week]
-        elif time_span == 'year':
-            year = int(request.POST.get('year'))
-            data = data[data['Date'].dt.year == year]
+        paginator = Paginator(df, 100)
+        page_obj = paginator.get_page(request.POST.get('page', 3))
 
-        # Convert data for chart
-        chart_data = [
-            {'x': row['Date'].strftime('%Y-%m-%d'), 'y': row['Price']}
-            for index, row in data.iterrows()
-        ]
-        return JsonResponse(chart_data, safe=False)
-    except Exception as e:
-        logger.error("Failed to fetch or process data: %s", e)
-        return JsonResponse({'error': 'Internal server error'}, status=500)
+        chart_data = {
+            'categories': [date.strftime('%Y-%m-%d') for date in page_obj.object_list['date']],
+            'data': [{'x': date.strftime('%Y-%m-%d'), 'y': price} for date, price in zip(page_obj.object_list['date'], page_obj.object_list['price'])]
+        }
 
-# Function to handle POST requests for data fetching
-@require_http_methods(["POST"])
-def get_data(request):
-    return fetch_chart_data(request)
+        cache.set(cache_key, chart_data, timeout=15 * 60)
+
+        return JsonResponse(chart_data)
+
+def show_chart(request):
+    context = {}
+    return render(request, 'SG.html', context)
