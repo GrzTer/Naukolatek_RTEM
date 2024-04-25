@@ -32,7 +32,9 @@
 
 ### Możliwość dodania w przyszłości czat bota, który by odpowiadał roli asystęta pracującego w celu zwiększenia użyteczności i sprawności użytkowania z aplikacji (znany tręd w tych czasach, a przy okolicznościach gdzie co nowy model AI pojawia się co raz, jest to z pewnością realny dodatek)
 
-MOże zostawić po angielsku?
+Może zostawić po angielsku?
+
+W przyszłości można, by przerobić/stworzyć system na działanie jako mini-serwer, który podczas tworzenia sieci elektrycznych w budynku, byłby podpięty jako urządzenie mózg, które zbiera z innych pomniejszych(IDK) 
 
 ---
 # Przydatne linki
