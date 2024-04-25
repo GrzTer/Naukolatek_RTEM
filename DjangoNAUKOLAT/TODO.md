@@ -14,3 +14,9 @@
 - [ ] Funkcje (Strona Dla Każdej z funkcji),
 - [ ] Lista Urządzeń (Ładna tabelka z Urządzeniami wypisanymi),
 - [ ] Strona Główna (detale)
+
+# Do zrobienia:
+- Zużycie w ciągu wybranego okresu(Rok, Kwartał, Miesiąc, Tydzień, Dzień) 
+  - (Jako wykres słupkowy i Combo chart)
+- Do listy urządzeń:
+  - statystyki urządzeń(największy pobór, itp.)

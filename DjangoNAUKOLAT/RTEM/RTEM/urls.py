@@ -28,7 +28,6 @@ urlpatterns = [
     path("MZE/", chart_view, name="chart_view"),
     path("about/", about_view, name="about_view"),
     path("PZ/", predict, name="forecast_energy"),
-    # path("SG/", energy_data_view, name="energy_data_view"),
     path("fetch_data/", EnergyPricesView.as_view(), name="fetch_data"),
     path("SG/", show_chart, name="show_chart"),
 ]

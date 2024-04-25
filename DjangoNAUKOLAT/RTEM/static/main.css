@@ -24,17 +24,15 @@ body { display: flex; flex-direction: column;}
 }
 
 
-/*.kpi-container {*/
-/*    text-align: center;*/
-/*    margin: 20px 0;*/
-/*}*/
+.chart-container {
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    margin: 20px;
+}
 
-/*.kpi-value {*/
-/*    font-size: 48px;*/
-/*    font-weight: bold;*/
-/*}*/
-
-/*.kpi-description {*/
-/*    font-size: 24px;*/
-/*    color: #555;*/
-/*}*/
+#chart {
+    max-width: 650px;
+    margin: auto;
+}

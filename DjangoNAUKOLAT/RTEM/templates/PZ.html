@@ -18,11 +18,15 @@
     <header class="header">
         {% include 'navbar.html' %}
     </header>
-    <div id="chart-area"></div> <!-- Placeholder for the chart -->
-    <div id="chart-bar"></div>   <!-- Placeholder for the second chart -->
+    
+    <div class="container mt-5">
+    <h2 class="">Prognoza Zużycia</h2>
+    </div>
+    <div id="chart-area"></div>
+    <div id="chart-bar"></div>
 
     <div>
-        {% include 'footer.html' %}
+        {% include 'Footer.html' %}
     </div>
     <script type="text/javascript">
         var globalChartData = JSON.parse('{{ forecast_data_json | safe }}');
