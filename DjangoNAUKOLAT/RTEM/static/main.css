@@ -1,51 +1,106 @@
-html, body { height: 100%; margin: 0; font-family: 'Arial', sans-serif; }
-body { display: flex; flex-direction: column;}
-.sticky-navbar { position: sticky; top: 0; z-index: 1080;  }
-.active-nav-link { color: #007bff; font-weight: bold; }
-/*.hero-background { background: url('path/to/dynamic-background.jpg') no-repeat center center; background-size: cover; }*/
-.btn-primary { background-color: #007bff; border-color: #007bff; }
-.btn-primary:hover { background-color: #0056b3; border-color: #004085; }
-.card:hover { transform: scale(1.05); }
-.navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1080; background-color: #f8f9fa;}
-.navbar-brand { position: absolute; left: 1rem;}
-.content { flex: 1;}
-.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
+/* Global Settings */
+html, body {
+    height: 100%;
+    margin: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f2f2f7;
+    color: #333;
+    overflow-x: hidden;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #0056b3; /* Darker blue for better contrast */
+    padding: 0.8rem 2rem; /* Increased padding for better touch interaction */
+    box-shadow: 0 4px 6px rgba(0,0,0,0.15);
+    color: white;
+}
+
+.navbar-brand {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+.nav-link {
+    color: #ffffff;
+    transition: color 0.3s;
+}
+
+.nav-link:hover, .nav-link.active {
+    color: #cce5ff;
+    background-color: transparent;
+}
+
+/* Buttons */
+.btn-primary {
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-primary:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+}
+
+/* Footer */
+.custom-footer {
+    background-color: #0056b3;
+    color: #ffffff;
+    padding: 1rem;
+    text-align: center;
+    border-top: 4px solid #004085;
+}
+
+/* Charts */
 .chart-area {
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 1.5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
 }
 
+/* Tooltips */
 .apexcharts-tooltip {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(255, 255, 255, 0.96);
     border-radius: 5px;
-    border: 1px solid #ddd;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
+/* Responsive Adjustments */
+@media (max-width: 992px) {
+    .navbar {
+        flex-direction: column;
+    }
 
-#chart {
-    max-width: 650px;
-    margin: 35px auto;
-}
-@media (max-width: 768px) {
-    #chart {
-        max-width: 100%;
+    .navbar-brand, .nav-link {
+        text-align: center;
+    }
+
+    .chart-area {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .custom-footer {
+        padding: 0.5rem;
     }
 }
 
+/* Custom Forms */
 #filtersForm {
     margin-bottom: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 #filtersForm .form-control {
-    max-width: 200px;
+    max-width: 100%;
 }
 
 #filtersForm button {
-    margin-top: 10px;
-}
-
-#bar-chart-container, #combo-chart-container {
-    margin-top: 20px;
+    margin-top: 0;
 }
