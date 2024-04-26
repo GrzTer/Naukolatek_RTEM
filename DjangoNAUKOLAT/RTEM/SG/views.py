@@ -12,7 +12,6 @@ from django.conf import settings
 
 class EnergyPricesView(View):
     def post(self, request):
-        # Utwórz klucz cache'u na podstawie parametrów żądania
         cache_key = f"energy_prices_{request.POST.get('year', '')}_{request.POST.get('quarter', '')}_{request.POST.get('month', '')}_{request.POST.get('week', '')}_{request.POST.get('country_code', '')}"
         cached_data = cache.get(cache_key)
         if cached_data:

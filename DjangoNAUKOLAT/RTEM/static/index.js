@@ -1,7 +1,9 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     const chartData = prepareChartData(globalChartData);
     initializeAreaChart(chartData);
-    initializeBarChart(chartData);
+    initializeBarChart(chartData, "chart-bar", "Energy Consumption Over Time");
+    initializeComboChart(chartData);
 });
 
 function prepareChartData(data) {
@@ -146,5 +148,46 @@ function initializeBarChart(chartData) {
     };
 
     const chart = new ApexCharts(document.querySelector("#chart-bar"), options);
+    chart.render();
+}
+function initializeComboChart(chartData, elementId) {
+    const options = {
+        chart: {
+            type: 'line',
+            stacked: false,
+            height: 350,
+            toolbar: {
+                show: true
+            }
+        },
+        stroke: {
+            width: [0, 2, 5],
+            curve: 'smooth'
+        },
+        plotOptions: {
+            bar: {
+                columnWidth: '50%'
+            }
+        },
+        series: [{
+            name: 'Bar',
+            type: 'bar',
+            data: chartData
+        }, {
+            name: 'Line',
+            type: 'line',
+            data: chartData
+        }],
+        xaxis: {
+            type: 'datetime'
+        },
+        yaxis: {
+            title: {
+                text: 'Energy Consumption (kWh)'
+            }
+        }
+    };
+
+    var chart = new ApexCharts(document.querySelector(`#${elementId}`), options);
     chart.render();
 }
