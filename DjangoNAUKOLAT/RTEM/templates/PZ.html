@@ -3,20 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
-    {% load static %}
     <link rel="shortcut icon" type="image/png" href="{% static 'images/images.png' %}">
     <title>Energy Consumption Forecast</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <script src="{% static 'index.js' %}"></script>
     <script src="{% static 'dropdown.js' %}"></script>
+    {% load static %}
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
     <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
 </head>
 <body>
     <header class="header">
-        {% include 'navbar.html' %}
+        {% include 'Navbar.html' %}
     </header>
     
     <div class="container mt-5">

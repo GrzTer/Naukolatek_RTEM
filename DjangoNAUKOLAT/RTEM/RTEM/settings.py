@@ -82,10 +82,6 @@ TEMPLATES = [
     },
 ]
 
-REST_FRAMEWORK = {
-    "DEFAULT_RENDERER_CLASSES": ("rest_framework.renderers.JSONRenderer",)
-}
-
 
 STATICFILES_DIRS = [BASE_DIR / "static"]
 # ENTSOE API Key

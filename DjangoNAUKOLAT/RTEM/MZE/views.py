@@ -11,7 +11,7 @@ def chart_view(request):
     formatted_data = [
         {
             "timestamp": item["timestamp"].isoformat(),
-            "energy_consumption": format(float(item["energy_consumption"]), ".5f"),
+            "energy_consumption": format(float(item["energy_consumption"]), ".3f"),
             "device_id": item["device_id"],
         }
         for item in data

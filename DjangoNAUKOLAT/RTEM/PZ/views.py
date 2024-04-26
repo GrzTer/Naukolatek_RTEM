@@ -5,8 +5,10 @@ import pandas as pd
 from sklearn.preprocessing import MinMaxScaler
 import json
 import os
+from django.views.decorators.cache import cache_page
 
 
+@cache_page(60 * 15)
 def predict(request):
     # Load the data
     data_path = os.path.join("PZ", "data1.csv")
