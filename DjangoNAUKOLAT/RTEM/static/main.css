@@ -9,7 +9,7 @@ body { display: flex; flex-direction: column;}
 .navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1080; background-color: #f8f9fa;}
 .navbar-brand { position: absolute; left: 1rem;}
 .content { flex: 1;}
-.custom-footer { align-self: flex-end; background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
+.custom-footer {margin-top: auto; display: flex;background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
 .chart-area {
     background-color: #f4f4f4;
     border-radius: 10px;
@@ -48,4 +48,13 @@ body { display: flex; flex-direction: column;}
 
 #bar-chart-container, #combo-chart-container {
     margin-top: 20px;
+}
+#main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
 }

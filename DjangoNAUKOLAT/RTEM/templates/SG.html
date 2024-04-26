@@ -18,7 +18,7 @@
     <header class="header">
         {% include 'Navbar.html' %}
     </header>
-
+<main>
 <div class="container mt-5">
         <h2>Select Time Span</h2>
         <div class="btn-group" role="group" aria-label="Time Span Selection">
@@ -42,7 +42,7 @@
         <h2>Energy Price Chart</h2> <p>(data collected form Entsoe 'https://transparency.entsoe.eu/')</p>
         <div id="energyChart"></div>
     </div>
-
+</main>
     <script>
         document.getElementById('dataForm').addEventListener('submit', function(e) {
             e.preventDefault();

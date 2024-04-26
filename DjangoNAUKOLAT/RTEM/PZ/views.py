@@ -38,7 +38,7 @@ def predict(request):
         start=df["timestamp"].iloc[-1], periods=len(predictions), freq="h"
     )
     forecast_data = [
-        {"timestamp": str(hour), "energy_consumption": pred}
+        {"timestamp": str(hour), "energy_consumption": f"{pred:.3f}"}
         for hour, pred in zip(forecast_hours, predictions)
     ]
 
