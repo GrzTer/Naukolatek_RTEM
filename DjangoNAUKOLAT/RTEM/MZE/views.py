@@ -1,4 +1,3 @@
-from django.core.cache import cache
 from django.shortcuts import render
 from django.core.serializers.json import DjangoJSONEncoder
 from .models import EnergyConsumption
@@ -18,6 +17,4 @@ def chart_view(request):
         for item in data
     ]
     chart_data = json.dumps(formatted_data, cls=DjangoJSONEncoder)
-    cache.set(data ,chart_data, timeout=15 * 60)
-
     return render(request, "MZE.html", {"chart_data": chart_data})
