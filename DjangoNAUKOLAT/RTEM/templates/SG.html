@@ -5,13 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Data Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
-    <script src="{% static 'dropdown.js' %}"></script>
     <script src="{% static 'index.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -22,35 +20,39 @@
             <h2>Select Time Span and Country</h2>
             <form id="dataForm" class="mb-3">
                 {% csrf_token %}
-                <div class="form-row">
-                    <div class="col-md-4 mb-3">
-                        <label for="countrySelect">Select Country:</label>
-                        <select class="custom-select" id="countrySelect" name="country_code" required>
-                            <!-- Dynamically populated countries and currencies -->
-                            <option value="PL" data-currency="PLN">Poland (PL)</option>
-                            <option value="DE" data-currency="EUR">Germany (DE)</option>
-                            <option value="FR" data-currency="EUR">France (FR)</option>
-                            <!-- Add other countries based on the map provided -->
-                        </select>
-                    </div>
-                    <div class="col-md-8 mb-3">
-                        <!-- Date selection inputs or other parameters can be added here -->
-                    </div>
+                <div class="mb-3">
+                    <label for="countrySelect">Select Country:</label>
+                    <select class="form-select" id="countrySelect" name="country_code" required>
+                        <option value="PL" data-currency="PLN">Poland (PL)</option>
+                        <option value="DE" data-currency="EUR">Germany (DE)</option>
+                        <option value="FR" data-currency="EUR">France (FR)</option>
+                    </select>
                 </div>
-                <button type="submit" class="btn btn-success">Get Data</button>
+                <div class="mb-3">
+                    <label for="datePicker">Select Date:</label>
+                    <input type="date" id="datePicker" name="date" class="form-control" onchange="disableOtherInputs('date')">
+                </div>
+                <div class="mb-3">
+                    <label for="weekPicker">Select Week:</label>
+                    <input type="week" id="weekPicker" name="week" class="form-control" onchange="disableOtherInputs('week')">
+                </div>
+                <div class="mb-3">
+                    <label for="monthPicker">Select Month:</label>
+                    <input type="month" id="monthPicker" name="month" class="form-control" onchange="disableOtherInputs('month')">
+                </div>
+                <button type="submit" class="btn btn-primary">Get Data</button>
             </form>
         </div>
         <div class="container mt-5">
-            <h2>Energy Price Chart</h2> 
+            <h2>Energy Price Chart</h2>
             <p>(Data collected from ENTSOE)</p>
             <div id="energyChart"></div>
         </div>
     </main>
     <script>
-        // Update this part to dynamically change the currency symbol
         document.getElementById('dataForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const formData = new FormData(document.getElementById('dataForm'));
+            const formData = new FormData(this);
             const currency = document.querySelector("#countrySelect option:checked").getAttribute("data-currency");
             fetch('/fetch_data/', {
                 method: 'POST',
@@ -60,50 +62,103 @@
                 updateChart(data, currency);
             }).catch(error => {
                 console.error('Error fetching data:', error);
-                alert('Error fetching data. Please check your network connection.');
+                alert(`Error fetching data: ${error.message}`);
             });
         });
 
+        function disableOtherInputs(selectedType) {
+            ['date', 'week', 'month'].forEach(type => {
+                if (type !== selectedType) {
+                    document.getElementById(`${type}Picker`).disabled = true;
+                    document.getElementById(`${type}Picker`).value = '';  // Clear any previously selected value
+                } else {
+                    document.getElementById(`${type}Picker`).disabled = false;
+                }
+            });
+        }
+        
         let chart;
-        function updateChart(chartData, currency) {
-            if (!chart) {
-                chart = new ApexCharts(document.querySelector("#energyChart"), {
-                    chart: {
-                        type: 'bar',
-                        height: 350
+         function updateChart(chartData, currency) {
+            // Determine the time span based on the data to adjust category intervals
+            let categoryInterval;
+            const timeSpan = determineTimeSpan(chartData.categories);
+            switch (timeSpan) {
+                case 'day':
+                    // If the data is for a day, show hourly intervals
+                    categoryInterval = 1;
+                    break;
+                case 'week':
+                    // If the data is for a week, show daily intervals
+                    categoryInterval = 24;
+                    break;
+                case 'month':
+                    // If the data is for a month, show intervals every 3 days
+                    categoryInterval = 24 * 3;
+                    break;
+                default:
+                    // If it's more than a month, show weekly intervals
+                    categoryInterval = 24 * 7;
+            }
+        
+            // Reduce the categories to avoid overlapping
+            const reducedCategories = chartData.categories.filter((element, index) => {
+                return index % categoryInterval === 0;
+            });
+        
+            // Configure the chart as necessary
+            const chartConfig = {
+                chart: {
+                    type: 'bar',
+                    height: 350
+                },
+                series: [{
+                    name: "Energy Price",
+                    data: chartData.data
+                }],
+                xaxis: {
+                    categories: reducedCategories,
+                    type: 'datetime',
+                    tickPlacement: 'on'
+                },
+                yaxis: {
+                    title: {
+                        text: `Price (${currency})`
+                    }
+                },
+                tooltip: {
+                    x: {
+                        format: 'dd MMM yyyy'
                     },
-                    series: [{
-                        name: "Energy Price",
-                        data: chartData.data
-                    }],
-                    xaxis: {
-                        categories: chartData.categories,
-                        type: 'datetime'
-                    },
-                    yaxis: {
-                        title: {
-                            text: `Price (${currency})`
-                        }
-                    },
-                    tooltip: {
-                        x: {
-                            format: 'dd MMM yyyy'
-                        },
-                        y: {
-                            formatter: function(val) {
-                                return `${val.toFixed(2)} ${currency}`;
-                            }
+                    y: {
+                        formatter: function(val) {
+                            return `${val.toFixed(2)} ${currency}`;
                         }
                     }
-                });
+                }
+            };
+        
+            if (!chart) {
+                chart = new ApexCharts(document.querySelector("#energyChart"), chartConfig);
                 chart.render();
             } else {
                 chart.updateOptions({
-                    yaxis: { title: { text: `Price (${currency})` }},
-                    xaxis: { categories: chartData.categories }
+                    xaxis: { categories: reducedCategories }
                 });
                 chart.updateSeries([{ data: chartData.data }]);
             }
+        }
+        
+        // Helper function to determine the time span based on the categories
+        function determineTimeSpan(categories) {
+            // Assuming categories are dates in 'YYYY-MM-DD' format
+            const dates = categories.map(dateStr => new Date(dateStr));
+            const msPerDay = 24 * 60 * 60 * 1000;
+            const timeSpan = (dates[dates.length - 1] - dates[0]) / msPerDay;
+        
+            if (timeSpan <= 1) return 'day';
+            if (timeSpan <= 7) return 'week';
+            if (timeSpan <= 30) return 'month';
+            return 'more';
         }
     </script>
     <footer>
