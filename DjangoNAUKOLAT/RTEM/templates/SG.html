@@ -1,66 +1,78 @@
 <!DOCTYPE html>
-<html lang="pl">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Data Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
-    <script src="{% static 'dropdown.js' %}"></script>
     <script src="{% static 'index.js' %}"></script>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 </head>
 <body>
-
     <header class="header">
         {% include 'Navbar.html' %}
     </header>
-<main>
-<div class="container mt-5">
-        <h2>Select Time Span</h2>
-        <div class="btn-group" role="group" aria-label="Time Span Selection">
-            <button type="button" class="btn btn-primary" onclick="updateTimeSpan('year')">Year</button>
-            <button type="button" class="btn btn-primary" onclick="updateTimeSpan('month')">Month</button>
-            <button type="button" class="btn btn-primary" onclick="updateTimeSpan('week')">Week</button>
+    <main>
+        <div class="container mt-5">
+            <h2>Select Time Span and Country</h2>
+            <form id="dataForm" class="mb-3">
+                {% csrf_token %}
+                <!-- Country Selection Dropdown -->
+                <div class="mb-3">
+                    <label for="countrySelect">Select Country:</label>
+                    <select class="form-select" id="countrySelect" name="country_code" required>
+                        <option value="PL" data-currency="PLN">Poland (PL)</option>
+                        <option value="DE" data-currency="EUR">Germany (DE)</option>
+                        <option value="FR" data-currency="EUR">France (FR)</option>
+                        <!-- Additional countries go here -->
+                    </select>
+                </div>
+                <!-- Time Span Selection Buttons -->
+                <div class="mb-3">
+                    <button type="button" class="btn btn-outline-primary" id="btnYear">This Year</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnQuarter">This Quarter</button>
+                    <button type="button" class="btn btn-outline-primary" id="btnMonth">This Month</button>
+                </div>
+                <input type="hidden" id="timeSpan" name="time_span" value="year">
+                <input type="hidden" id="timeSpan" name="time_span" value="quarter">
+                <input type="hidden" id="timeSpan" name="time_span" value="month">
+                <button type="submit" class="btn btn-primary">Get Data</button>
+            </form>
         </div>
-
-        <div id="additionalInputs" class="my-3"></div>
-
-        <form id="dataForm" class="mb-3">
-            {% csrf_token %}
-            <div class="mb-3">
-                <label for="country_code" class="form-label">Country Code:</label>
-                <input type="text" class="form-control" id="country_code" name="country_code" required>
-            </div>
-            <button type="submit" class="btn btn-success">Get Data</button>
-        </form>
-    </div>
-    <div class="container mt-5">
-        <h2>Energy Price Chart</h2> <p>(data collected form Entsoe 'https://transparency.entsoe.eu/')</p>
-        <div id="energyChart"></div>
-    </div>
-</main>
+        <div class="container mt-5">
+            <h2>Energy Price Chart</h2>
+            <p>(Data collected from ENTSOE)</p>
+            <div id="energyChart"></div>
+        </div>
+    </main>
     <script>
+        document.getElementById('btnYear').addEventListener('click', () => setTimeSpan('year'));
+
         document.getElementById('dataForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const formData = new FormData(document.getElementById('dataForm'));
+            const formData = new FormData(this);
+            const currency = document.querySelector("#countrySelect option:checked").getAttribute("data-currency");
             fetch('/fetch_data/', {
                 method: 'POST',
                 body: formData
             }).then(response => response.json())
             .then(data => {
-                updateChart(data);
+                updateChart(data, currency);
             }).catch(error => {
                 console.error('Error fetching data:', error);
-                alert('Error fetching data. Please check your network connection.');
+                alert(`Error fetching data: ${error.message}`);
             });
         });
 
+        function setTimeSpan(timeSpan) {
+            document.getElementById('timeSpan').value = timeSpan;
+            document.getElementById('dataForm').submit();
+        }
         let chart;
-        function updateChart(chartData) {
+        function updateChart(chartData, currency) {
             if (!chart) {
                 chart = new ApexCharts(document.querySelector("#energyChart"), {
                     chart: {
@@ -77,7 +89,7 @@
                     },
                     yaxis: {
                         title: {
-                            text: 'Price (Currency)'
+                            text: `Price (${currency})`
                         }
                     },
                     tooltip: {
@@ -86,7 +98,7 @@
                         },
                         y: {
                             formatter: function(val) {
-                                return `${val.toFixed(2)} Currency`;
+                                return `${val.toFixed(2)} ${currency}`;
                             }
                         }
                     }
@@ -94,17 +106,13 @@
                 chart.render();
             } else {
                 chart.updateOptions({
-                    xaxis: {
-                        categories: chartData.categories
-                    }
+                    yaxis: { title: { text: `Price (${currency})` }},
+                    xaxis: { categories: chartData.categories }
                 });
-                chart.updateSeries([{
-                    data: chartData.data
-                }]);
+                chart.updateSeries([{ data: chartData.data }]);
             }
         }
     </script>
-
     <footer>
         {% include 'Footer.html' %}
     </footer>
