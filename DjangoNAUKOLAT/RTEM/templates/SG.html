@@ -5,11 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Energy Data Chart</title>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="{% static 'dropdown.js' %}"></script>
     <script src="{% static 'index.js' %}"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
 </head>
 <body>
     <header class="header">
@@ -20,40 +22,35 @@
             <h2>Select Time Span and Country</h2>
             <form id="dataForm" class="mb-3">
                 {% csrf_token %}
-                <!-- Country Selection Dropdown -->
-                <div class="mb-3">
-                    <label for="countrySelect">Select Country:</label>
-                    <select class="form-select" id="countrySelect" name="country_code" required>
-                        <option value="PL" data-currency="PLN">Poland (PL)</option>
-                        <option value="DE" data-currency="EUR">Germany (DE)</option>
-                        <option value="FR" data-currency="EUR">France (FR)</option>
-                        <!-- Additional countries go here -->
-                    </select>
+                <div class="form-row">
+                    <div class="col-md-4 mb-3">
+                        <label for="countrySelect">Select Country:</label>
+                        <select class="custom-select" id="countrySelect" name="country_code" required>
+                            <!-- Dynamically populated countries and currencies -->
+                            <option value="PL" data-currency="PLN">Poland (PL)</option>
+                            <option value="DE" data-currency="EUR">Germany (DE)</option>
+                            <option value="FR" data-currency="EUR">France (FR)</option>
+                            <!-- Add other countries based on the map provided -->
+                        </select>
+                    </div>
+                    <div class="col-md-8 mb-3">
+                        <!-- Date selection inputs or other parameters can be added here -->
+                    </div>
                 </div>
-                <!-- Time Span Selection Buttons -->
-                <div class="mb-3">
-                    <button type="button" class="btn btn-outline-primary" id="btnYear">This Year</button>
-                    <button type="button" class="btn btn-outline-primary" id="btnQuarter">This Quarter</button>
-                    <button type="button" class="btn btn-outline-primary" id="btnMonth">This Month</button>
-                </div>
-                <input type="hidden" id="timeSpan" name="time_span" value="year">
-                <input type="hidden" id="timeSpan" name="time_span" value="quarter">
-                <input type="hidden" id="timeSpan" name="time_span" value="month">
-                <button type="submit" class="btn btn-primary">Get Data</button>
+                <button type="submit" class="btn btn-success">Get Data</button>
             </form>
         </div>
         <div class="container mt-5">
-            <h2>Energy Price Chart</h2>
+            <h2>Energy Price Chart</h2> 
             <p>(Data collected from ENTSOE)</p>
             <div id="energyChart"></div>
         </div>
     </main>
     <script>
-        document.getElementById('btnYear').addEventListener('click', () => setTimeSpan('year'));
-
+        // Update this part to dynamically change the currency symbol
         document.getElementById('dataForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            const formData = new FormData(this);
+            const formData = new FormData(document.getElementById('dataForm'));
             const currency = document.querySelector("#countrySelect option:checked").getAttribute("data-currency");
             fetch('/fetch_data/', {
                 method: 'POST',
@@ -63,14 +60,10 @@
                 updateChart(data, currency);
             }).catch(error => {
                 console.error('Error fetching data:', error);
-                alert(`Error fetching data: ${error.message}`);
+                alert('Error fetching data. Please check your network connection.');
             });
         });
 
-        function setTimeSpan(timeSpan) {
-            document.getElementById('timeSpan').value = timeSpan;
-            document.getElementById('dataForm').submit();
-        }
         let chart;
         function updateChart(chartData, currency) {
             if (!chart) {
