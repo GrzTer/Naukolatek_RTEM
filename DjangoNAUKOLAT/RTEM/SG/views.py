@@ -20,15 +20,16 @@ class EnergyPricesView(View):
             os.makedirs(data_dir)
 
         data_path = os.path.join(data_dir, f"energy_prices_{country_code}.csv")
-        # # Attempt to load existing data if available
-        # try:
-        #     df = pd.read_csv(data_path, parse_dates=['date'])
-        # except FileNotFoundError:
-        #     df = pd.DataFrame(columns=['date', 'price'])
-        #
-        # # Fetch data if not available
-        # if df.empty or (time_span == 'day' and not df['date'].dt.date.eq(now().date()).any()):
-        #     df = fetch_historical_data(country_code, data_path)
+
+        try:
+            df = pd.read_csv(data_path, parse_dates=['date'])
+            df['date'] = pd.to_datetime(df['date'], utc=True).dt.tz_convert(get_default_timezone())
+        except FileNotFoundError:
+            df = pd.DataFrame(columns=['date', 'price'])
+
+        if df.empty or (date_selected and not df['date'].dt.date.eq(make_aware(datetime.strptime(date_selected, '%Y-%m-%d')).date()).any()):
+            fetch_historical_data(country_code)
+
         df = pd.read_csv(data_path, parse_dates=['date'])
         df['date'] = pd.to_datetime(df['date'], utc=True).dt.tz_convert(get_default_timezone())
 
@@ -57,7 +58,9 @@ class EnergyPricesView(View):
         }
 
         return JsonResponse(chart_data)
-
+def aggregate_to_daily(df):
+    df_daily = df.resample('D', on='date').mean().reset_index()
+    return df_daily
 def fetch_historical_data(country_code='PL', start_date=None, end_date=None):
     api_key = settings.ENTSOE_API_KEY
     client = EntsoePandasClient(api_key=api_key)
