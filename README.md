@@ -32,6 +32,8 @@
 
 ### Możliwość dodania w przyszłości czat bota, który by odpowiadał roli asystęta pracującego w celu zwiększenia użyteczności i sprawności użytkowania z aplikacji (znany tręd w tych czasach, a przy okolicznościach gdzie co nowy model AI pojawia się co raz, jest to z pewnością realny dodatek)
 Możliwość w przyszłości rozwinięcia SG do pokazywania przyszłościowych cen rynkowych
+Dodać slide mówiący o możliwości współpracy z Entso-e w sprawie api, jeżeli znajdą się problemy (np. przy większej ilości osób, za czym idzie więcej zapytań na api.)
+
 Może zostawić po angielsku?
 
 
