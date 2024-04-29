@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Energy Data Chart</title>
+    <title>Wykres Cen Energii</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'main.css' %}">
     <script src="{% static 'index.js' %}"></script>
@@ -22,43 +22,45 @@
     </header>
     <main>
         <div class="container mt-5">
-            <h2>Select Time Span and Country</h2>
+            <h2>Wybierz Okres Czasu i Kraj</h2>
             <form id="dataForm" class="mb-3">
                 {% csrf_token %}
 <div class="mb-3">
-                    <label for="countrySelect">Select Country:</label>
-                    <select class="form-select" id="countrySelect" name="country_code" required>
-                        <option value="PL" data-currency="PLN">Poland (PL)</option>
-                        <option value="FR" data-currency="EUR">France (FR)</option>
-                        <option value="ES" data-currency="EUR">Spain (ES)</option>
-                        <option value="NL" data-currency="EUR">Netherlands (NL)</option>
-                        <option value="BE" data-currency="EUR">Belgium (BE)</option>
-                        <option value="FI" data-currency="EUR">Finland (FI)</option>
-                        <option value="UK" data-currency="GBP">United Kingdom (UK)</option>
-                        <option value="DK" data-currency="DKK">Denmark (DK)</option>
-                    </select>
+                <label for="countrySelect">Wybierz Kraj:</label>
+                <select class="form-select" id="countrySelect" name="country_code" required>
+                    <option value="PL" data-currency="PLN">Polska (PL)</option>
+                    <option value="FR" data-currency="EUR">Francja (FR)</option>
+                    <option value="ES" data-currency="EUR">Hiszpania (ES)</option>
+                    <option value="NL" data-currency="EUR">Holandia (NL)</option>
+                    <option value="BE" data-currency="EUR">Belgia (BE)</option>
+                    <option value="FI" data-currency="EUR">Finlandia (FI)</option>
+                    <option value="UK" data-currency="GBP">Wielka Brytania (UK)</option>
+                    <option value="DK" data-currency="DKK">Dania (DK)</option>
+                </select>
+
                 </div>
                 <div class="mb-3">
-                    <label for="datePicker">Select Date:</label>
+                    <label for="datePicker">Wybierz Dzień:</label>
                     <input type="date" id="datePicker" name="date" class="form-control" onchange="disableOtherInputs('date')">
                 </div>
                 <div class="mb-3">
-                    <label for="weekPicker">Select Week:</label>
+                    <label for="weekPicker">Wybierz Tydzień:</label>
                     <input type="week" id="weekPicker" name="week" class="form-control" onchange="disableOtherInputs('week')">
                 </div>
                 <div class="mb-3">
-                    <label for="monthPicker">Select Month:</label>
+                    <label for="monthPicker">Wybierz Miesiąc:</label>
                     <input type="month" id="monthPicker" name="month" class="form-control" onchange="disableOtherInputs('month')">
                 </div>
                 <button type="submit" class="btn btn-primary">Get Data</button>
-                <p class="mt-3">Note: If data does not load, try again.</p>
+{#                <p class="mt-3">Podpowiedź: Jeżeli wykres się nie wyświetla, spróbuj ponownie.</p>#}
             </form>
         </div>
         <div class="container mt-5">
-            <h2>Energy Price Chart</h2>
-            <p>(Data collected from ENTSOE)</p>
+            <h2>Wykres cen energii</h2>
+            <p>(Dane zebrane z ENTSO-E)</p>
             <div id="energyChart"></div>
         </div>
+
     </main>
     <script>
         document.getElementById('dataForm').addEventListener('submit', function(e) {
