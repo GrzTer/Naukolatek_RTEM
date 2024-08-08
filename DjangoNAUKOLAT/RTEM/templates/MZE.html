@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="{% static 'index.js' %}"></script>
+    <script src="{% static 'dropdown.js' %}"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-32x32.png' %}">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+    <script src='https://cdn.jsdelivr.net/npm/apexcharts'></script>
+    <title>Monitorowanie Zużycia Energii</title>
+</head>
+<body>
+    <header class="header">
+        {% include 'navbar.html' %}
+    </header>
+<main>
+    <div class="container mt-5">
+        <h1 class="mb-4">Monitorowanie Zużycia Energii</h1>
+    <div id="chart-area"></div>
+    </div>
+</main>
+{#        <div id="chart-bar"></div>#}
+
+<div>
+    {% include 'Footer.html' %}
+</div>
+    <script type="text/javascript">
+        var globalChartData = JSON.parse('{{ chart_data | safe }}');
+    </script>
+</body>
+</html>

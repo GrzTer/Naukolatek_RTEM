@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pl">
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
+    <title>RTEM</title>
+    {% load static %}
+    <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon-32x32.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <script src="{% static 'dropdown.js' %}"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+<header class="header">
+    {% include 'Navbar.html' %}
+</header>
+<main>
+<div class="container mt-5">
+    <div class="jumbotron hero-background">
+        <h1 class="display-4">Witamy na stronie (Konceptowej) naszego projektu monitorowania energii!</h1>
+        <p class="lead">Wykorzystanie najnowszych technologii IoT i uczenia maszynowego do optymalizacji zużycia energii, przewidywalnie w serwerowniach i przy sprzętach wysokiego poboru prądu i wysokiej troski</p>
+        <hr class="my-4">
+        <p>Poznaj nasze funkcje, aby już dziś zacząć oszczędzać energię i pieniądze.</p>
+        <a class="btn btn-primary btn-lg" href="{% url 'about_view' %}" role="button">Dowiedz się więcej</a>
+    </div>
+
+    <div class="row">
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">MZE</h5>
+                    <p class="card-text">Monitoruj z precyzją: Wykorzystaj moc zaawansowanych czujników i
+                        technologii IoT do szczegółowego śledzenia zużycia energii,
+                        od pojedynczych urządzeń po całe kompleksy budynków.</p>
+                    <a href="{% url 'chart_view' %}" class="btn btn-custom">Przeglądaj</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">PZ</h5>
+                    <p class="card-text">Przewidywanie i planowanie:
+                        Wykorzystaj najnowocześniejsze metody uczenia maszynowego, w tym TensorFlow,
+                        aby dokładnie prognozować przyszłe zapotrzebowanie na energię w oparciu o dane historyczne i
+                        pojawiające się trendy.</p>
+                    <a href="{% url 'forecast_energy' %}" class="btn btn-custom">Przeglądaj</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">SG</h5>
+                    <p class="card-text">Kompatybilność z inteligentnymi sieciami:
+                        To jużPłynna integracja z inteligentnymi sieciami w celu
+                        dostępu do cen energii w czasie rzeczywistym za pomocą Entso-e API,
+                        usprawniając podejmowanie decyzji i zarządzanie energią.</p>
+                    <a href="{% url 'show_chart' %}" class="btn btn-custom">Przeglądaj</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</main>
+<div>
+    {% include 'Footer.html' %}
+</div>
+
+
+</body>
+</html>

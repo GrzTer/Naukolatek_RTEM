@@ -52,6 +52,8 @@ W przyszłości można, by przerobić/stworzyć system na działanie jako mini-s
 - [CheatSheet](https://docs.google.com/document/d/1z2Mm_dkT3-zRV_uZ3sOxd9jDH--bTU4HZxVyXrb-sHo/edit?pli=1)
 - ```pip install -r requirements.txt```
 - ```python manage.py makemigrations```
+- ```python manage.py runserver```
+- ```python manage.py migrate --run-syncdb```
 ---
 Superuser:
 - Username: admin

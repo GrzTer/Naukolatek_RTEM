@@ -1,0 +1,60 @@
+html, body { height: 100%; margin: 0; font-family: 'Arial', sans-serif; }
+body { display: flex; flex-direction: column;}
+.sticky-navbar { position: sticky; top: 0; z-index: 1080;  }
+.active-nav-link { color: #007bff; font-weight: bold; }
+/*.hero-background { background: url('path/to/dynamic-background.jpg') no-repeat center center; background-size: cover; }*/
+.btn-primary { background-color: #007bff; border-color: #007bff; }
+.btn-primary:hover { background-color: #0056b3; border-color: #004085; }
+.card:hover { transform: scale(1.05); }
+.navbar { display: flex; justify-content: center; align-items: center; position: sticky; top: 0; z-index: 1080; background-color: #f8f9fa;}
+.navbar-brand { position: absolute; left: 1rem;}
+.content { flex: 1;}
+.custom-footer {margin-top: auto; display: flex;background-color: #f8f9fa; padding: 10px; display: flex; justify-content: center;  text-align: center;}
+.chart-area {
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.apexcharts-tooltip {
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+
+#chart {
+    max-width: 650px;
+    margin: 35px auto;
+}
+@media (max-width: 768px) {
+    #chart {
+        max-width: 100%;
+    }
+}
+
+#filtersForm {
+    margin-bottom: 20px;
+}
+
+#filtersForm .form-control {
+    max-width: 200px;
+}
+
+#filtersForm button {
+    margin-top: 10px;
+}
+
+#bar-chart-container, #combo-chart-container {
+    margin-top: 20px;
+}
+#main-content {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+main {
+  flex: 1;
+}
