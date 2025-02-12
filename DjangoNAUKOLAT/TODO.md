@@ -1,19 +1,19 @@
 # Funkcje: 
                     MZE ?działa? -> PA -> PZ -> OZ
 - [x] MZE
-- [ ] PA
-- [ ] PZ
-- [ ] OZ
+- [x] PA
+- [x] PZ
+- [x] OZ
 ---
 # FrontEnd/BackEnd:
 - [x] favicon,
 - [ ] !!!!!!!!!!!                    Analiza Priorytetów                 !!!!!!!!!!!
 - [ ] Refaktor palety kolorów
-- [ ] ikony do funkcji,
-- [ ] O Projekcie (Rzetelny opis projektu), - 50%
-- [ ] Funkcje (Strona Dla Każdej z funkcji),
+- [x] ikony do funkcji,
+- [x] O Projekcie (Rzetelny opis projektu), - 50%
+- [x] Funkcje (Strona Dla Każdej z funkcji),
 - [ ] Lista Urządzeń (Ładna tabelka z Urządzeniami wypisanymi),
-- [ ] Strona Główna (detale)
+- [x] Strona Główna (detale)
 
 # Do zrobienia:
 - Zużycie w ciągu wybranego okresu(Rok, Kwartał, Miesiąc, Tydzień, Dzień) 
