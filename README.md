@@ -65,7 +65,7 @@ python manage.py createsuperuser
 
 # 6. Launch the development server
 python manage.py runserver            18
-
+```
 > Default demo credentials
 Username: admin  Password: 1234 
 
