@@ -135,5 +135,3 @@ Please open an issue first to discuss substantial changes and follow the branchi
 
 No license file is present. Unless one is added, **all rights are reserved by the author**.  
 Contact the repository owner before re-using the code.
-```0
-
