@@ -103,7 +103,7 @@ Username: admin  Password: 1234
 ---
 
 ## Repository Layout
-
+```
 DjangoNAUKOLAT/
 ├── manage.py
 ├── project_name/          # Django settings, ASGI, Celery config
@@ -113,7 +113,7 @@ DjangoNAUKOLAT/
 │   ├── tasks.py           # Celery jobs
 │   └── consumers.py       # Django Channels WebSocket handlers
 └── templates/ & static/   # Dashboard UI
-
+```
 ---
 
 ## Design Resources
