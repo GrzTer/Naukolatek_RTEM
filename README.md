@@ -1,42 +1,139 @@
-# **REAL TIME ENERGY MANAGER**
-# [![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/86c477b2-96bc-451a-9293-201fcb830042)](https://chat.openai.com/auth/login)**[CHAT GPT](https://chat.openai.com/auth/login)**[![chatgpt (1)](https://github.com/GrzegorzTwicz/Naukolatek_RTEM/assets/144318154/5a91fe2e-b438-48f7-96df-c7bc00ec4adb)](https://chat.openai.com/auth/login)
-## Co do użycia:
-- Django Channels
-- PostgreSQL z rozszerzeniem TimescaleDB dla danych szeregów czasowych
-- TensorFlow/Keras
-- Django REST Framework
-- Celery z Django
-- WebSockets
-- Django Background Tasks
+# Real-Time Energy Manager (RTEM)
+
+**Branch to use:** `1_1`
+
+A Django-based platform that **monitors, predicts, and optimises electric-power usage in real time**.  
+The project combines IoT telemetry, time-series storage, and machine-learning forecasts to help data-centre and high-load facilities cut energy costs and react instantly to anomalies. 0  
+
 ---
-# Każdy nowo zaczęty issue: 
-- Clon/Pull
-- RÓB NOWY BRANCH
-- Zmiana w plikach models.py = ```python manage.py makemigrations```
+
+## Key Capabilities
+
+| Code-name | Description |
+|-----------|-------------|
+| **MZE – Monitoring** | Collect granular voltage, current, temperature, and frequency data from every device or circuit in a building. 1 |
+| **PZ – Prediction** | Use TensorFlow/Keras models to forecast future consumption trends from historical time-series. 2 |
+| **OZ – Optimisation** | Recommend load-shifting or equipment-schedule changes to flatten peaks and reduce bills. 3 |
+| **PA – Alerts** | Real-time notifications when sensors report abnormal patterns or hardware faults. 4 |
+| **SG – Smart-Grid Integration** | Optional link to live tariff feeds so decisions factor in dynamic energy prices. 5 |
+
 ---
-## Funkcje do zrobienia:
-- (MZE)Monitorowanie Zużycia Energetycznego: Wykorzystamy zaawansowane czujniki i technologię IoT do śledzenia zużycia energii elektrycznej na różnych poziomach, od pojedynczych urządzeń po całe budynki.
-- (PZ)Prognozowanie Zużycia: Zastosujemy algorytmy uczenia maszynowego, takie jak TensorFlow, do prognozowania przyszłego zużycia energii na podstawie danych historycznych i bieżących trendów. 
-- (OZ)Optymalizacja Zużycia: Nasza aplikacja będzie automatycznie proponować sposoby optymalizacji zużycia energii, uwzględniając m.in. zmiany czasu pracy urządzeń i wykorzystanie źródeł odnawialnych. 
-- (PA)Powiadomienia i Alarmy: Aplikacja generuje powiadomienia w czasie rzeczywistym w przypadku awarii urządzeń lub nieprawidłowych wzorców zużycia energii. 
-- (SG)Integracja z Smart Grid: Projekt zostanie zintegrowany z inteligentnymi sieciami energetycznymi, co umożliwi dostęp do danych dotyczących cen energii w czasie rzeczywistym.
+
+## Tech Stack
+
+* **Django 4 + Django Channels** – core web framework & WebSocket streaming 6  
+* **PostgreSQL + TimescaleDB** – time-series storage backend 7  
+* **Django REST Framework** – public API 8  
+* **Celery & Django Background Tasks** – asynchronous data ingestion and ML jobs 9  
+* **TensorFlow / Keras** – consumption forecasting models 10  
+* **WebSockets** – live dashboards and alerts 11  
+
+---
+
+## Data Model (core app)
+
+| Model | Fields (excerpt) | Purpose |
+|-------|------------------|---------|
+| `Device` | `serial_number` (auto), `building`, `location` | Uniquely identifies each monitored asset. 12 |
+| `TemperatureMeasurement` | `device` (FK), `value`, `timestamp` | Tracks thermal conditions per device. 13 |
+| `VoltageMeasurement` | `device` (FK), `voltage`, `current`, `timestamp` | Logs electrical parameters for analytics. 14 |
+
+The schema is designed for easy extension when new IoT sensor types are introduced. 15  
+
+---
+
+## Quick Start
+
+```bash
+# 1. Clone the repository and switch to the Django project
+git clone https://github.com/GrzTer/Naukolatek_RTEM.git
+cd Naukolatek_RTEM/DjangoNAUKOLAT
+
+# 2. Create and activate a virtual environment
+python -m venv env
+# Windows
+env\Scripts\activate
+# macOS / Linux
+source env/bin/activate
+
+# 3. Install dependencies
+pip install -r requirements.txt     # Django, DRF, Celery, etc. 16
+
+# 4. Initialise the database
+python manage.py migrate --run-syncdb   17
+
+# 5. (Optional) create an admin account
+python manage.py createsuperuser
+
+# 6. Launch the development server
+python manage.py runserver            18
+```
+> Default demo credentials
+Username: admin  Password: 1234 
+
+
 
 
 ---
-# Przydatne linki
-- [FIGMA RTEM FLOW](https://www.figma.com/file/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?type=whiteboard&node-id=0%3A1&t=FW0Yp6fZ3LtkCLzH-1)
-- [FIGMA MOCK'UP](https://www.figma.com/file/zaxl5wU608z9J7BesLggCP/naukolatek-team-library?type=design&node-id=0%3A1&mode=design&t=PuOzFr1hWV7bI672-1)
+
+## Usage Highlights
+
+1. **Add Devices** – Log in to `/admin/` and register each rack, UPS, or circuit breaker.  
+2. **Stream Telemetry** – Connect edge IoT modules to the REST endpoint or WebSocket gateway.  
+3. **Visualise** – Dashboards update live with power draw and temperature readings.  
+4. **Receive Alerts** – E-mail, SMS, or in-app pop-ups trigger on thresholds or ML anomaly scores.  
+5. **Review Insights** – Drill into historical charts or export CSV for further analysis.  
+
 ---
-# Przydatne komendy
-### Django
-- Aktywacja środowiska: ```.\env\Scripts\activate``` / Windows
-- Dezaktywacja środowiska: ```deactivate``` / Windows
-- [CheatSheet](https://docs.google.com/document/d/1z2Mm_dkT3-zRV_uZ3sOxd9jDH--bTU4HZxVyXrb-sHo/edit?pli=1)
-- ```pip install -r requirements.txt```
-- ```python manage.py makemigrations```
-- ```python manage.py runserver```
+
+## Development Workflow
+
+* **Branching** – Start every feature on a separate branch; never commit directly to `main`.  
+* **Migrations** – After editing `models.py`, run `python manage.py makemigrations` and commit the migration files.  
+* **Task Queue** – Launch workers with `celery -A project_name worker -l info` to process background jobs.  
+* **Lint & Tests** – A pre-commit hook is recommended (black, flake8, pytest).  
+
 ---
-Superuser:
-- Username: admin
-- Password: 1234
+
+## Project Roadmap
+
+- [ ] **Live tariff API** integration (ENTSO-E) for real-time price signals.  
+- [ ] **Chat-bot assistant** to surface optimisation suggestions in natural language.  
+- [ ] **Multi-building dashboards** with role-based access controls.  
+- [ ] **Containerised deployment** (Docker & Compose).  
+
 ---
+
+## Repository Layout
+```
+DjangoNAUKOLAT/
+├── manage.py
+├── project_name/          # Django settings, ASGI, Celery config
+├── monitoring/            # Device & measurement apps
+│   ├── models.py
+│   ├── api/               # DRF viewsets & serializers
+│   ├── tasks.py           # Celery jobs
+│   └── consumers.py       # Django Channels WebSocket handlers
+└── templates/ & static/   # Dashboard UI
+```
+---
+
+## Design Resources
+
+* **User flow** – Figma prototype “RTEM FLOW”  
+* **UI mock-ups** – High-fidelity dashboard sketches in Figma.  
+* **Cheat-sheet** – Google Doc with common Django commands.  
+
+---
+
+## Contributing
+
+Pull requests are welcome!  
+Please open an issue first to discuss substantial changes and follow the branching and migration guidelines above.  
+
+---
+
+## License
+
+No license file is present. Unless one is added, **all rights are reserved by the author**.  
+Contact the repository owner before re-using the code.
