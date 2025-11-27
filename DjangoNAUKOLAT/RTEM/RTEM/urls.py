@@ -17,7 +17,7 @@ Including another URLconf
 
 from django.contrib import admin
 from django.urls import path
-from Home.views import home_view, about_view
+from Home.views import home_view, about_view, devices_view
 from MZE.views import chart_view
 from PZ.views import predict
 from SG.views import EnergyPricesView, show_chart
@@ -30,4 +30,5 @@ urlpatterns = [
     path("PZ/", predict, name="forecast_energy"),
     path("fetch_data/", EnergyPricesView.as_view(), name="fetch_data"),
     path("SG/", show_chart, name="show_chart"),
+    path("devices/", devices_view, name="devices_view"),
 ]

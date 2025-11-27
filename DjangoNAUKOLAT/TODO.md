@@ -1,22 +1,31 @@
-# Funkcje: 
-                    MZE ?działa? -> PA -> PZ -> OZ
-- [x] MZE
-- [ ] PA
-- [ ] PZ
-- [ ] OZ
----
-# FrontEnd/BackEnd:
-- [x] favicon,
-- [ ] !!!!!!!!!!!                    Analiza Priorytetów                 !!!!!!!!!!!
-- [ ] Refaktor palety kolorów
-- [ ] ikony do funkcji,
-- [ ] O Projekcie (Rzetelny opis projektu), - 50%
-- [ ] Funkcje (Strona Dla Każdej z funkcji),
-- [ ] Lista Urządzeń (Ładna tabelka z Urządzeniami wypisanymi),
-- [ ] Strona Główna (detale)
+# Roadmap
 
-# Do zrobienia:
-- Zużycie w ciągu wybranego okresu(Rok, Kwartał, Miesiąc, Tydzień, Dzień) 
-  - (Jako wykres słupkowy i Combo chart)
-- Do listy urządzeń:
-  - statystyki urządzeń(największy pobór, itp.)
+## Features
+
+- [x] MZE (Energy Consumption Monitoring) - *Needs verification*
+- [ ] PA (Notifications and Alerts)
+- [ ] PZ (Consumption Forecasting)
+- [ ] OZ (Consumption Optimization)
+
+---
+
+## Frontend/Backend
+
+- [x] Favicon
+- [ ] **Priority Analysis**
+- [ ] Refactor color palette
+- [ ] Icons for features
+- [ ] "About Project" page (50% complete)
+- [ ] Dedicated page for each feature
+- [ ] Device list (needs a well-designed table)
+- [ ] Main page (details)
+
+---
+
+## To-Do
+
+-   **Consumption Analysis:**
+    -   Display consumption data for selected periods (Year, Quarter, Month, Week, Day).
+    -   Use bar charts and combo charts for visualization.
+-   **Device List Enhancements:**
+    -   Device statistics (e.g., highest consumption).

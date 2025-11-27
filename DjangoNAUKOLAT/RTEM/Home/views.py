@@ -8,3 +8,7 @@ def home_view(request):
 
 def about_view(request):
     return render(request, "O_Projekcie.html")
+
+
+def devices_view(request):
+    return render(request, "Devices.html")
