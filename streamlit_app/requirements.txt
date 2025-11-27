@@ -1,5 +1,5 @@
-Django
+streamlit
 pandas
-scikit-learn
 tensorflow
+scikit-learn
 entsoe-py
