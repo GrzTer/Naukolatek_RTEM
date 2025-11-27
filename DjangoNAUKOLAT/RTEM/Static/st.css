@@ -5,11 +5,19 @@
 :root {
   /*========== Colors ==========*/
   /*Color mode HSL(hue, saturation, lightness)*/
-  --first-color: hsl(82, 60%, 28%);
+  --first-color: hsl(228, 66%, 53%);
   --title-color: hsl(0, 0%, 15%);
   --text-color: hsl(0, 0%, 35%);
-  --body-color: hsl(0, 0%, 95%);
+  --body-color: hsl(228, 100%, 99%);
   --container-color: hsl(0, 0%, 100%);
+  --border-color: hsl(228, 100%, 95%);
+  --chart-background: hsl(228, 100%, 98%);
+  --dark-blue: #000524;
+  --light-gray: #f8f9fa;
+  --primary-blue: #007bff;
+  --hover-blue: #0056b3;
+  --border-blue: #004085;
+
 
   /*========== Font and typography ==========*/
   /*.5rem = 8px | 1rem = 16px ...*/

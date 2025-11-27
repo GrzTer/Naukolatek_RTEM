@@ -1,10 +1,16 @@
-# Documentación sobre RTEM
+# RTEM Documentation
 ---
-## (MZE) Monitorowanie Zużycia Energii:
-Aplikacja Energy Consumption Monitoring została zaprojektowana w celu wykorzystania zaawansowanej technologii IoT do śledzenia i analizowania zużycia energii elektrycznej na różnych poziomach, od pojedynczych urządzeń po całe budynki. Wykorzystując Django do backendu, system jest zbudowany wokół kluczowych modeli, w tym Device, TemperatureMeasurement i VoltageMeasurement, które wspólnie ułatwiają gromadzenie, przechowywanie i analizę krytycznych parametrów, takich jak częstotliwość, rezystancja, napięcie i temperatura.
+## (MZE) Energy Consumption Monitoring:
+The Energy Consumption Monitoring application is designed to use advanced IoT technology to track and analyze electricity consumption at various levels, from individual devices to entire buildings. Using Django for the backend, the system is built around key models, including `Device`, `TemperatureMeasurement`, and `VoltageMeasurement`, which together facilitate the collection, storage, and analysis of critical parameters such as frequency, resistance, voltage, and temperature.
 
-Każde urządzenie jest jednoznacznie identyfikowane przez numer seryjny, generowany automatycznie w celu zapewnienia unikalności i łatwości śledzenia. Modele TemperatureMeasurement i VoltageMeasurement są powiązane z konkretnymi urządzeniami, umożliwiając precyzyjne monitorowanie warunków środowiskowych i parametrów elektrycznych w czasie. Pomiary są opatrzone znacznikami czasu, zapewniając historyczną ścieżkę danych do analizy i optymalizacji zużycia energii.
+Each device is uniquely identified by a serial number, which is automatically generated to ensure uniqueness and ease of tracking. The `TemperatureMeasurement` and `VoltageMeasurement` models are linked to specific devices, allowing for precise monitoring of environmental conditions and electrical parameters over time. The measurements are time-stamped, providing a historical data trail for analyzing and optimizing energy consumption.
 
-Aplikacja obsługuje wielu użytkowników i budynków, dzięki czemu jest skalowalna zarówno dla nieruchomości mieszkalnych, jak i komercyjnych. Została zaprojektowana z myślą o możliwości rozbudowy, umożliwiając przyszłą integrację dodatkowych typów pomiarów i urządzeń IoT bez znaczącej restrukturyzacji.
+The application supports multiple users and buildings, making it scalable for both residential and commercial properties. It has been designed with extensibility in mind, allowing for the future integration of additional measurement types and IoT devices without significant restructuring.
 
-Niniejsza dokumentacja ma na celu poprowadzenie deweloperów i administratorów systemu przez konfigurację, wdrażanie i codzienne zarządzanie aplikacją 'Monitorowanie Zużycia Energii', zapewniając solidne i przyjazne dla użytkownika doświadczenie w zakresie skutecznego monitorowania i zmniejszania zużycia energii.
+This documentation is intended to guide developers and system administrators through the configuration, deployment, and daily management of the 'Energy Consumption Monitoring' application, ensuring a robust and user-friendly experience for effective energy monitoring and reduction.
+
+## (PZ) Energy Consumption Prediction:
+The Energy Consumption Prediction application uses a machine learning model to forecast future energy consumption. It uses a pre-trained Keras model to predict the energy consumption for the next 24 hours. The model is loaded and used to make predictions, which are then displayed on a chart.
+
+## (SG) Smart Grid Integration:
+The Smart Grid Integration application is designed to connect to the ENTSO-E API to fetch real-time energy data. This data can be used to make more informed decisions about energy consumption and to optimize energy usage based on real-time market data.
