@@ -6,4 +6,7 @@ class EnergyForecast(models.Model):
     predicted_consumption = models.FloatField()
 
     def __str__(self):
-        return f"Forecast for {self.date}: Predicted - {self.predicted_consumption} kWh"
+        return (
+            f"Forecast for {self.date}: "
+            f"Predicted - {self.predicted_consumption} kWh"
+        )

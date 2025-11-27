@@ -14,14 +14,17 @@ class EnergyConsumption(models.Model):
     # It's useful for debugging and in the Django admin.
     def __str__(self):
         # Customize the string representation of EnergyConsumption instances
-        return f"Device {self.device_id} at {self.timestamp} - {self.energy_consumption} kWh"
+        return (
+            f"Device {self.device_id} at {self.timestamp} - "
+            f"{self.energy_consumption} kWh"
+        )
 
-    # Meta options - these are optional and used to define metadata for your model
+    # Meta options - used to define metadata for your model
     class Meta:
-        # Human-readable name of the model in the Django admin
+        # Human-readable name for the model in the admin
         verbose_name = "Energy Consumption"
-        # Human-readable plural name of the model in the Django admin
+        # Human-readable plural name for the model in the admin
         verbose_name_plural = "Energy Consumptions"
         # Optional: Ordering of the records when querying the database
-        # Here, records are ordered by timestamp in descending order
+        # Records are ordered by timestamp in descending order
         ordering = ["-timestamp"]
