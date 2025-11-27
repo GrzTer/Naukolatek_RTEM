@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,7 +21,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-lzl5xwqtrgm$gp0s)1(^7&(r78bj!4%!)2qzzs3@ba=s)$i0y%"
+SECRET_KEY = os.environ.get(
+    "DJANGO_SECRET_KEY",
+    "django-insecure-lzl5xwqtrgm$gp0s)1(^7&(r78bj!4%!)2qzzs3@ba=s)$i0y%",
+)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -38,7 +42,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "SG",
-    "PZ",
+    "PZ.apps.PzAppConfig",
     "MZE",
     "Home",
 ]
@@ -141,5 +145,7 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
-STATIC_URL = "static/"
-STATICFILES_DIRS = [BASE_DIR / "static"]
+
+# MODEL CONFIGURATION
+MODEL_PATH = BASE_DIR / "PZ/model_checkpoint.keras"
+DATA_PATH = BASE_DIR / "PZ/data1.csv"

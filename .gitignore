@@ -1,1 +1,14 @@
-/DjangoNAUKOLAT/env/Lib/site-packages/
+# Ignore the virtual environment
+/DjangoNAUKOLAT/env/
+
+# Ignore the database file
+*.sqlite3
+
+# Ignore python cache files
+__pycache__/
+
+# Ignore environment variables
+.env
+
+# Ignore IDE files
+.idea/
