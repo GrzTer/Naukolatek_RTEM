@@ -1,10 +1,13 @@
-# Documentación sobre RTEM
+# Dokumentacja RTEM
+
 ---
+
 ## (MZE) Monitorowanie Zużycia Energii:
-Aplikacja Energy Consumption Monitoring została zaprojektowana w celu wykorzystania zaawansowanej technologii IoT do śledzenia i analizowania zużycia energii elektrycznej na różnych poziomach, od pojedynczych urządzeń po całe budynki. Wykorzystując Django do backendu, system jest zbudowany wokół kluczowych modeli, w tym Device, TemperatureMeasurement i VoltageMeasurement, które wspólnie ułatwiają gromadzenie, przechowywanie i analizę krytycznych parametrów, takich jak częstotliwość, rezystancja, napięcie i temperatura.
 
-Każde urządzenie jest jednoznacznie identyfikowane przez numer seryjny, generowany automatycznie w celu zapewnienia unikalności i łatwości śledzenia. Modele TemperatureMeasurement i VoltageMeasurement są powiązane z konkretnymi urządzeniami, umożliwiając precyzyjne monitorowanie warunków środowiskowych i parametrów elektrycznych w czasie. Pomiary są opatrzone znacznikami czasu, zapewniając historyczną ścieżkę danych do analizy i optymalizacji zużycia energii.
+Aplikacja do monitorowania zużycia energii została zaprojektowana w celu wykorzystania technologii do śledzenia i analizy zużycia energii elektrycznej. Wykorzystując Django jako backend, system jest zbudowany wokół modelu `EnergyConsumption`, który ułatwia gromadzenie, przechowywanie i analizę zużycia energii.
 
-Aplikacja obsługuje wielu użytkowników i budynków, dzięki czemu jest skalowalna zarówno dla nieruchomości mieszkalnych, jak i komercyjnych. Została zaprojektowana z myślą o możliwości rozbudowy, umożliwiając przyszłą integrację dodatkowych typów pomiarów i urządzeń IoT bez znaczącej restrukturyzacji.
+Każdy pomiar jest powiązany z konkretnym urządzeniem i posiada znacznik czasu, co zapewnia historyczny ślad danych do analizy i optymalizacji zużycia energii.
 
-Niniejsza dokumentacja ma na celu poprowadzenie deweloperów i administratorów systemu przez konfigurację, wdrażanie i codzienne zarządzanie aplikacją 'Monitorowanie Zużycia Energii', zapewniając solidne i przyjazne dla użytkownika doświadczenie w zakresie skutecznego monitorowania i zmniejszania zużycia energii.
+Aplikacja jest skalowalna i może być wykorzystywana zarówno w budynkach mieszkalnych, jak i komercyjnych. Została zaprojektowana z myślą o rozbudowie, co pozwala na przyszłą integrację dodatkowych typów pomiarów i urządzeń.
+
+Niniejsza dokumentacja ma na celu przeprowadzenie deweloperów i administratorów systemu przez proces konfiguracji, wdrażania i codziennego zarządzania aplikacją "Monitorowanie Zużycia Energii", zapewniając solidne i przyjazne dla użytkownika doświadczenie w skutecznym monitorowaniu i zmniejszaniu zużycia energii.

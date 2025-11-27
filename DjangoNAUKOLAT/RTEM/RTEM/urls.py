@@ -16,18 +16,16 @@ Including another URLconf
 """
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from Home.views import home_view, about_view
-from MZE.views import chart_view
-from PZ.views import predict
 from SG.views import EnergyPricesView, show_chart
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("", home_view, name="home_view"),
-    path("MZE/", chart_view, name="chart_view"),
     path("about/", about_view, name="about_view"),
-    path("PZ/", predict, name="forecast_energy"),
+    path("mze/", include("MZE.urls")),
+    path("pz/", include("PZ.urls")),
     path("fetch_data/", EnergyPricesView.as_view(), name="fetch_data"),
-    path("SG/", show_chart, name="show_chart"),
+    path("sg/", show_chart, name="show_chart"),
 ]
