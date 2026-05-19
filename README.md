@@ -2,7 +2,7 @@
 
 A Django-based platform that **monitors, predicts, and optimises electric-power usage in real time**.
 The project combines IoT telemetry, time-series storage, and machine-learning forecasts to help data-centre and high-load facilities cut energy costs and react instantly to anomalies.
-
+[Figma](https://www.figma.com/board/Pkl86gwsODaW5lYygA1F1l/RTEM-FLOW?t=Z4vdwVDfC56CHTY6-6)
 ---
 
 ## Key Capabilities
